@@ -62,7 +62,7 @@ const CategoryList = () => {
                                                         <li className="clearfix">
                                                             <div className="utf_post_block_style post-float clearfix">
                                                                 <div className="utf_post_thumb">
-                                                                    <a href="/"> <img className="img-fluid" src={post.img_1} alt="" /> </a>
+                                                                    <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a>
                                                                 </div>
                                                                 <div className="utf_post_content">
                                                                     <h2 className="utf_post_title clamped title-small"><a href="post.html">{post.title}</a></h2>

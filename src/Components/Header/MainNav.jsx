@@ -34,13 +34,13 @@ const MainNav = () => {
                                             menus.map((currElem, id) => {
 
                                                 if (currElem.subcategories.length !==0) {
-                                                    return <li key={currElem.subcategories.id} className="nav-item dropdown">
+                                                    return <li key={currElem.subcategories.id} className="nav-item dropdown ">
                                                         <NavLink to="/category" className="nav-link">{currElem.name}<i className="fa fa-angle-down"></i></NavLink>
                                                         <ul className="utf_dropdown_menu" role="menu">
                                                             {
                                                                 currElem.subcategories.map((sub,ind) => {
                                                                     return(
-                                                                        <li >
+                                                                        <li className="nav-link">
                                                                         <NavLink to="/subcategory"><i className="fa fa-angle-double-right"></i>{sub.name}</NavLink>
                                                                     </li>
                                                                     )
@@ -53,7 +53,7 @@ const MainNav = () => {
                                                     </li>
                                                     
                                                 }
-                                                 return <li className="nav-item"><NavLink to="/category">{currElem.name}</NavLink></li>
+                                                 return <li className="nav-item "><NavLink to="/category">{currElem.name}</NavLink></li>
                                             
                                             })
                                         }
