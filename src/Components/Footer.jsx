@@ -1,10 +1,23 @@
+import React,{useState, useEffect} from 'react'
+import instance from '../Api/axios'
 import Copyrights from './Footer/Copyrights'
 import PopularPost from './Footer/PopularPost'
 
 const Footer = () => {
+    const [categories, setCategories] = useState([])
+
+    const GetMenusApi = async () => {
+        const res = await instance.get('/categories')
+        console.log(res.data.language.categories);
+        setCategories(res.data.language.categories)
+    }
+
+    useEffect(() => {
+        GetMenusApi()
+    }, [])
     return (
         <>
-               {/*  Footer Start  */}
+            {/*  Footer Start  */}
             <footer id="footer" className="footer">
                 <div className="utf_footer_main">
                     <div className="container">
@@ -42,38 +55,28 @@ const Footer = () => {
                             <div className="col-lg-4 col-sm-12 col-xs-12 footer-widget widget-categories">
                                 <h3 className="widget-title">Popular Categories</h3>
                                 <ul>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Make-Up</span><span className="catCounter"> (05)</span></a>
-                                    </li>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Health</span><span className="catCounter"> (06)</span></a>
-                                    </li>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Audio</span><span className="catCounter"> (15)</span></a>
-                                    </li>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Travel</span><span className="catCounter"> (25)</span></a>
-                                    </li>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Health</span><span className="catCounter"> (05)</span></a>
-                                    </li>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Gadgets</span><span className="catCounter"> (12)</span></a>
-                                    </li>
-                                    <li>
-                                        <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">Food</span><span className="catCounter"> (14)</span></a>
-                                    </li>
+                                    {
+                                        categories.map((curElem, ind) => {
+                                            return (
+                                                <li key={curElem.id}>
+                                                    <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">{curElem.name}</span><span className="catCounter"> {curElem.id}</span></a>
+                                                </li>
+                                            )
+                                        })
+                                    }
+
+
                                 </ul>
                             </div>
 
-                         <PopularPost/>
+                            <PopularPost />
                         </div>
                     </div>
                 </div>
             </footer>
             {/*  Footer End  */}
 
-           <Copyrights/>
+            <Copyrights />
         </>
     )
 }

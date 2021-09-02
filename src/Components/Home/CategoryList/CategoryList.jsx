@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react"
-import CategoryListComp from "./CategoryListComp"
+import { NavLink } from "react-router-dom"
+import TravelImg from '../../../images/news/lifestyle/travel2.jpg'
+// import CategoryListComp from "./CategoryListComp"
 // import CategoryListData from "./CategoryData"
 import instance from '../../../Api/axios'
 const CategoryList = () => {
  
-    const [user, setUser] = useState([])
+    const [postdata, setPostData] = useState([])
     
-    const getUserData = async() =>{
-       const request =  await instance.get('https://wcprojects.in/api/eng/categories')
-       console.log(request.data.language);
-       setUser(request.data.language.categories)
+    const getPostData = async() =>{
+       const res =  await instance.get('https://wcprojects.in/api/english')
+       console.log(res.data.language);
+       setPostData(res.data.language.categories)
     }
  
     useEffect(() => {
-        getUserData()
+        getPostData()
         
-    }, [user])
+    }, [])
   
     
    
@@ -27,8 +29,67 @@ const CategoryList = () => {
                     <div className="row">
 
                         {
-                            user.map((currElem, index)=>{
-                                return <CategoryListComp key={index} CategoryName={currElem.name} />
+                            postdata.map((currElem, index)=>{
+                                if((currElem.posts.length<=3) && (currElem.posts.length!=0 ))
+                                {
+                                    return(
+                                        <div className="col-lg-4">
+                                    <div className="block color-default">
+                                       
+                                        <h3 className="utf_block_title"><span>{currElem.name}</span></h3>
+    
+                                        <div className="utf_post_overaly_style clearfix">
+                                            <div className="utf_post_thumb">
+                                                <a href="/"> <img className="img-fluid" src={TravelImg} alt="" /> </a>
+                                            </div>
+                                            <div className="utf_post_content">
+                                                <h2 className="utf_post_title"><NavLink to="/post">Zhang social media pop also known when smart innocent...</NavLink></h2>
+                                                <div className="utf_post_meta">
+                                                    <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        <div className="utf_list_post_block">
+                                            <ul className="utf_list_post">
+                    
+                                                {
+                                                    currElem.posts.map((post, ind) => {
+                                                        
+                                                   if((currElem.posts.length<=4) && (currElem.posts.length!=0 ) )
+                                                   {
+                                                    return (
+                                                        <li className="clearfix">
+                                                            <div className="utf_post_block_style post-float clearfix">
+                                                                <div className="utf_post_thumb">
+                                                                    <a href="/"> <img className="img-fluid" src={post.img_1} alt="" /> </a>
+                                                                </div>
+                                                                <div className="utf_post_content">
+                                                                    <h2 className="utf_post_title clamped title-small"><a href="post.html">{post.title}</a></h2>
+                                                                    <div className="utf_post_meta">
+                                                                        <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>  
+                                                        </li>
+                                                    )
+                                                   }
+                                                  
+                                                   
+                                                
+                                                        
+                    
+                                                    })
+                                                }
+                                            </ul>
+                                        </div>
+                    
+                                    </div>
+                                </div>
+                                    ) 
+                                }
+                               
+
                             })
                         }
                         
