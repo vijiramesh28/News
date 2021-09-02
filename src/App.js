@@ -1,24 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+// import { useTranslation } from 'react-i18next';
+import {BrowserRouter, Switch, Route } from 'react-router-dom';
+import Footer from './Components/Footer';
+import Header from './Components/Header'
+import Category from './Pages/Category';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
+import PageNotFound from './Pages/PageNotFound';
+import Post from './Pages/Post';
+
 
 function App() {
+//   const { t } = useTranslation()
+//  const data =  t('language.name',{returnObjects: true})
+//   console.log(data)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    
+{/* //     <h2>{data}</h2>  */}
+  <BrowserRouter>
+<div className="body-inner">
+    <Header />
+    
+    <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/category" component={Category} />
+        <Route exact path="/subcategory" component={Category} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/post" component={Post} />
+        {/* <Route exact path="/subcategory" component={Subcategory} /> */}
+        <Route component={PageNotFound} />
+    </Switch>
+
+    <Footer />
+</div>
+    </BrowserRouter>
+    </>
   );
 }
 
