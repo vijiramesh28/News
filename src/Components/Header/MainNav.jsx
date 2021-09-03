@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import instance from "../../Api/axios"
 const MainNav = () => {
 
@@ -15,6 +15,8 @@ const MainNav = () => {
     useEffect(() => {
         GetMenusApi()
     }, [])
+
+    
     return (
         <>
 
@@ -28,20 +30,20 @@ const MainNav = () => {
                                 </button>
                                 <div id="navbarSupportedContent" className="collapse navbar-collapse navbar-responsive-collapse">
                                     <ul className="nav navbar-nav">
-                                        <li className="nav-item active"><NavLink to="/">Home</NavLink></li>
+                                        <li className="nav-item active"><Link to="/">Home</Link></li>
 
                                         {
                                             menus.map((currElem, id) => {
 
                                                 if (currElem.subcategories.length !==0) {
                                                     return <li key={currElem.subcategories.id} className="nav-item dropdown ">
-                                                        <NavLink to="/category" className="nav-link">{currElem.name}<i className="fa fa-angle-down"></i></NavLink>
+                                                        <Link to={`/category/:${currElem.id}`} className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
                                                         <ul className="utf_dropdown_menu" role="menu">
                                                             {
                                                                 currElem.subcategories.map((sub,ind) => {
                                                                     return(
                                                                         <li className="nav-link">
-                                                                        <NavLink to="/subcategory"><i className="fa fa-angle-double-right"></i>{sub.name}</NavLink>
+                                                                        <Link to="/subcategory"><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
                                                                     </li>
                                                                     )
                                                                  
@@ -53,7 +55,7 @@ const MainNav = () => {
                                                     </li>
                                                     
                                                 }
-                                                 return <li className="nav-item "><NavLink to="/category">{currElem.name}</NavLink></li>
+                                                 return <li className="nav-item" ><Link to={`/category/:${currElem.id}`}  >{currElem.name}</Link></li>
                                             
                                             })
                                         }

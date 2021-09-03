@@ -15,6 +15,7 @@ const LangName = [{
     name:'Hindi'
 }
 ]
+// onClick={()=>t.changeLanguage(curElem.code) }
 const Topbar = () => {
     const { t } = useTranslation()
     return (
@@ -27,7 +28,7 @@ const Topbar = () => {
                             <ul className="unstyled top-nav">
                                 {
                                     LangName.map((curElem, ind)=>{
-                                        return <li key={ind}><NavLink to="/" activeClassName="active" onClick={()=>t.changeLanguage(curElem.code) }>{curElem.name}</NavLink></li>
+                                        return <li key={ind} ><NavLink to="/">{curElem.name}</NavLink></li>
                                     })
                                 }
                                 
