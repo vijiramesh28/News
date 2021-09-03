@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '../node_modules/owl.carousel/dist/assets/owl.carousel.css'
+import '../node_modules/owl.carousel/dist/assets/owl.theme.default.css'
+import '../node_modules/owl.carousel/dist/owl.carousel.js'
 import i18n from 'i18next';
 import { initReactI18next } from "react-i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';

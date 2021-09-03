@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
+import dateFormat from 'dateformat'
 import TravelImg from '../../../images/news/lifestyle/travel2.jpg'
 // import CategoryListComp from "./CategoryListComp"
 // import CategoryListData from "./CategoryData"
@@ -43,7 +44,7 @@ const CategoryList = () => {
                                                 <a href="/"> <img className="img-fluid" src={TravelImg} alt="" /> </a>
                                             </div>
                                             <div className="utf_post_content">
-                                                <h2 className="utf_post_title"><NavLink to="/post">Zhang social media pop also known when smart innocent...</NavLink></h2>
+                                                <h2 className="utf_post_title"><NavLink to="/post">{currElem.posts.title}</NavLink></h2>
                                                 <div className="utf_post_meta">
                                                     <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
                                                 </div>
@@ -55,6 +56,8 @@ const CategoryList = () => {
                     
                                                 {
                                                     currElem.posts.map((post, ind) => {
+                                                        const postdate =  post.updated_at
+                                                        const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
                                                         
                                                    if((currElem.posts.length<=4) && (currElem.posts.length!=0 ) )
                                                    {
@@ -67,7 +70,7 @@ const CategoryList = () => {
                                                                 <div className="utf_post_content">
                                                                     <h2 className="utf_post_title clamped title-small"><a href="post.html">{post.title}</a></h2>
                                                                     <div className="utf_post_meta">
-                                                                        <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
+                                                                        <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
                                                                     </div>
                                                                 </div>
                                                             </div>  

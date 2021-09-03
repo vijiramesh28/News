@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { NavLink } from 'react-router-dom'
 import TravelImg from '../../../images/news/lifestyle/travel2.jpg'
+import dateFormat from 'dateformat'
+
 const CategoryListComp = (props) => {
     const [postdata, setPostData] = useState([])
 
@@ -34,10 +36,35 @@ const CategoryListComp = (props) => {
 
                     <div className="utf_list_post_block">
                         <ul className="utf_list_post">
-
                             {
-                                postdata.map((curElem, ind) => {
-
+                                postdata.map((curElem,ind)=>curElem.posts.map((post,ind)=>{
+                                    const postdate =  post.updated_at
+                                    console.log(post);
+                                    const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
+                                    if (curElem.name===props.CategoryName) {
+                                        return (
+                                            <li className="clearfix">
+                                                <div className="utf_post_block_style post-float clearfix">
+                                                    <div className="utf_post_thumb">
+                                                        <a href="/"> <img className="img-fluid" src={TravelImg} alt="" /> </a>
+                                                    </div>
+                                                    <div className="utf_post_content">
+                                                        <h2 className="utf_post_title clamped title-small"><a href="post.html">{posts.title}</a></h2>
+                                                        <div className="utf_post_meta">
+                                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        )
+                                    }
+                                }))
+                            }
+                            {/* {
+                                postdata.map((curElem, ind) =>curElem.posts.map((post,ind)=>{ 
+                                    const postdate =  post.updated_at
+                                    console.log(postdate);
+                                    const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
                                     if (curElem.name===props.CategoryName) {
                                         return (
                                             <li className="clearfix">
@@ -48,16 +75,15 @@ const CategoryListComp = (props) => {
                                                     <div className="utf_post_content">
                                                         <h2 className="utf_post_title clamped title-small"><a href="post.html">{curElem.posts.title}</a></h2>
                                                         <div className="utf_post_meta">
-                                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
+                                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </li>
                                         )
                                     }
-
-                                })
-                            }
+                                }
+                            } */}
                         </ul>
                     </div>
 
