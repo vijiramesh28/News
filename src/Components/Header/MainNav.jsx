@@ -36,13 +36,13 @@ const MainNav = () => {
                                             menus.map((currElem, id) => {
 
                                                 if (currElem.subcategories.length !==0) {
-                                                    return <li key={currElem.subcategories.id} className="nav-item dropdown ">
+                                                    return <li key={currElem.id} className="nav-item dropdown ">
                                                         <Link to={`/category/:${currElem.id}`} className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
                                                         <ul className="utf_dropdown_menu" role="menu">
                                                             {
                                                                 currElem.subcategories.map((sub,ind) => {
                                                                     return(
-                                                                        <li className="nav-link">
+                                                                        <li key={sub.id} className="nav-link">
                                                                         <Link to="/subcategory"><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
                                                                     </li>
                                                                     )
