@@ -1,13 +1,14 @@
 import React,{useState, useEffect} from 'react'
-import instance from '../Api/axios'
+import axios from 'axios'
 import Copyrights from './Footer/Copyrights'
 import PopularPost from './Footer/PopularPost'
+
 
 const Footer = () => {
     const [categories, setCategories] = useState([])
 
     const GetMenusApi = async () => {
-        const res = await instance.get('/categories')
+        const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setCategories(res.data.language.categories)
     }
@@ -56,7 +57,9 @@ const Footer = () => {
                                 <h3 className="widget-title">Popular Categories</h3>
                                 <ul>
                                     {
-                                        categories.map((curElem, ind) => {
+                                       
+                                       categories.map((curElem, ind) =>{
+                                         
                                             return (
                                                 <li key={curElem.id}>
                                                     <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">{curElem.name}</span><span className="catCounter"> {curElem.id}</span></a>

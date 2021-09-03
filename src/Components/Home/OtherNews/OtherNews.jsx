@@ -64,13 +64,29 @@ const OtherNews = () => {
                         <div className="col-lg-4 col-sm-12">
                             <div className="sidebar utf_sidebar_right">
                                 <div className="widget color-default">
-
-                                    <h3 className="utf_block_title"><span>Job Related News</span></h3>
+                                    {
+                                        OtherNews.slice(1,2).map((curElem,ind)=>{
+                                            return (
+                                                <h3 key={ind} className="utf_block_title"><span>{curElem.name}</span></h3>
+                                            )
+                                        })
+                                        
+                                    }
+                                
 
                                     <div className="utf_list_post_block">
                                         <ul className="utf_list_post review-post-list">
-
-                                            <PostRelatedNews />
+                                            {
+                                                OtherNews.slice(2,3).map((curElem,ind)=>curElem.posts.slice(1,5).map((post,ind)=>{
+                                                    const postdate = post.updated_at;
+                                                    const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
+                                                    return(
+                                                        <PostRelatedNews key={ind}  postImg={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} categoryTitle={curElem.name} postTitle={post.title} postDate={postmoddate} postDetails={post.details.substring(0, 200) + "..."}  />
+                                                    )
+                                                }))
+                                                 
+                                            }
+                                         
 
 
                                         </ul>
