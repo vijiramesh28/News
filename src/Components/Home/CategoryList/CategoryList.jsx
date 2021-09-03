@@ -37,7 +37,7 @@ const CategoryList = () => {
                                             {
                                                 currElem.posts.slice(0,1).map((onepost,ind)=>{
                                                     const postdate =  onepost.updated_at
-                                                        const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
+                                                    const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
                                                     return(
                                                         <div className="utf_post_overaly_style clearfix">
                                                         <div className="utf_post_thumb">

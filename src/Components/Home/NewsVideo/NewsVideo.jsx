@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import dateFormat from 'dateformat'
 import NewsVideoComp from "./NewsVideoComp"
-import VideoData from "./VideoData"
+
 
 const NewsVideo = () => {
     const [Videolist, setVideolist] = useState([])
