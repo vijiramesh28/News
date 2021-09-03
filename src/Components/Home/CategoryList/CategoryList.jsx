@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import dateFormat from 'dateformat'
-import TravelImg from '../../../images/news/lifestyle/travel2.jpg'
-// import CategoryListComp from "./CategoryListComp"
-// import CategoryListData from "./CategoryData"
 import instance from '../../../Api/axios'
 const CategoryList = () => {
  
@@ -30,26 +27,33 @@ const CategoryList = () => {
                     <div className="row">
 
                         {
-                            postdata.map((currElem, index)=>{
-                                if((currElem.posts.length<=3) && (currElem.posts.length!=0 ))
-                                {
-                                    return(
+                           postdata.slice(0,3).map((currElem, index)=>{
+                               
+                                  return(
                                         <div className="col-lg-4">
                                     <div className="block color-default">
                                        
                                         <h3 className="utf_block_title"><span>{currElem.name}</span></h3>
-    
-                                        <div className="utf_post_overaly_style clearfix">
-                                            <div className="utf_post_thumb">
-                                                <a href="/"> <img className="img-fluid" src={TravelImg} alt="" /> </a>
-                                            </div>
-                                            <div className="utf_post_content">
-                                                <h2 className="utf_post_title"><NavLink to="/post">{currElem.posts.title}</NavLink></h2>
-                                                <div className="utf_post_meta">
-                                                    <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            {
+                                                currElem.posts.slice(0,1).map((onepost,ind)=>{
+                                                    const postdate =  onepost.updated_at
+                                                        const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
+                                                    return(
+                                                        <div className="utf_post_overaly_style clearfix">
+                                                        <div className="utf_post_thumb">
+                                                            <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${onepost.img_1}`} alt="" /> </a>
+                                                        </div>
+                                                        <div className="utf_post_content">
+                                                            <h2 className="utf_post_title"><NavLink to="/post">{onepost.title}</NavLink></h2>
+                                                            <div className="utf_post_meta">
+                                                                <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    )
+                                                })
+                                            }
+                                     
                     
                                         <div className="utf_list_post_block">
                                             <ul className="utf_list_post">
@@ -90,7 +94,7 @@ const CategoryList = () => {
                                     </div>
                                 </div>
                                     ) 
-                                }
+                                
                                
 
                             })
