@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const Breadcrumb = () => {
+const Breadcrumb = ({categoryname}) => {
     return (
         <div>
             {/* <!-- Page Title Start --> */}
@@ -9,8 +10,8 @@ const Breadcrumb = () => {
                     <div className="row">
                         <div className="col-md-12">
                             <ul className="breadcrumb">
-                                <li><a href="/">Home</a></li>
-                                <li>Crime</li>
+                                <li><Link to="/">Home</Link></li>
+                                <li>{categoryname}</li>
                             </ul>
                         </div>
                     </div>

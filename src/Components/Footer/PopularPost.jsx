@@ -12,7 +12,7 @@ const PopularPost = () => {
 
     const GetPostData = async () => {
         const res = await axios.get('https://wcprojects.in/api/english')
-        console.log(res.data.language.categories);
+        console.log(res.data);
         setLatestNews(res.data.language.categories)
     }
     useEffect(() => {

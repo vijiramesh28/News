@@ -1,21 +1,30 @@
+import dateFormat from 'dateformat'
 
-
-const TabMainNews = () => {
+const TabMainNews = ({postData}) => {
     return (
         <>
-            <div className="utf_post_block_style clearfix">
+        {
+            postData.slice(0,1).map((curElem, ind)=>curElem.posts.slice(0,1).map((post,ind)=>{
+                const postdate =  post.updated_at;
+                const postmoddate = dateFormat(postdate,"dd mmmm , yyyy");
+                return(
+                    <div className="utf_post_block_style clearfix">
                 <div className="utf_post_thumb">
-                    <a href="/"> <img className="img-fluid" src="images/news/tech/gadget1.jpg" alt="" /> </a>
+                    <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a>
                 </div>
-                <a className="utf_post_cat" href="/">Lifestyle</a>
+                <a className="utf_post_cat" href="/">{curElem.name}</a>
                 <div className="utf_post_content">
-                    <h2 className="utf_post_title"><a href="/">Zhang social media pop also known when smart innocent Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a></h2>
+                    <h2 className="utf_post_title"><a href="/">{post.title}</a></h2>
                     <div className="utf_post_meta">
-                        <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
+                        <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
                     </div>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text since has five...</p>
+                    <p>{post.details.substring(0, 200) + "..."}</p>
                 </div>
             </div>
+                )
+            }))
+        }
+            
         </>
     )
 }

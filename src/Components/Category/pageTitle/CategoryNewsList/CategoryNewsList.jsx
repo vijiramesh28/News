@@ -1,7 +1,7 @@
 import OtherNewsComp from "../../../Home/OtherNews/OtherNewsComp"
 import RecentNews from "../../RecentNews/RecentNews"
 
-const CategoryNewsList = () => {
+const CategoryNewsList = ({categoryname}) => {
     return (
         <>
 
@@ -10,12 +10,12 @@ const CategoryNewsList = () => {
       <div className="row">
         <div className="col-lg-8 col-md-12">
           <div className="block category-listing category-style2">
-            <h3 className="utf_block_title"><span>Crime News</span></h3>
+            <h3 className="utf_block_title"><span>{categoryname}</span></h3>
             <ul className="subCategory unstyled">
               <li><a href="/">Anti Curroption</a></li>
               <li><a href="/">Police News</a></li>
             </ul>
-           <OtherNewsComp />
+           <OtherNewsComp  />
             <OtherNewsComp />
             
           </div>

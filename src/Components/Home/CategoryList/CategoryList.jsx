@@ -60,8 +60,8 @@ const CategoryList = () => {
                     
                                                 {
                                                     currElem.posts.map((post, ind) => {
-                                                        const postdate =  post.updated_at
-                                                        const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
+                                                        const postdate =  post.updated_at;
+                                                        const postmoddate = dateFormat(postdate,"dd mmmm , yyyy");
                                                         
                                                    if((currElem.posts.length<=4) && (currElem.posts.length!=0 ) )
                                                    {

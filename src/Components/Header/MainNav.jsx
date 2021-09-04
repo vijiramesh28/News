@@ -37,7 +37,7 @@ const MainNav = () => {
 
                                                 if (currElem.subcategories.length !==0) {
                                                     return <li key={currElem.id} className="nav-item dropdown ">
-                                                        <Link to={`/category/:${currElem.id}`} className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
+                                                        <Link to={`/category/${currElem.id}`} className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
                                                         <ul className="utf_dropdown_menu" role="menu">
                                                             {
                                                                 currElem.subcategories.map((sub,ind) => {
@@ -55,7 +55,7 @@ const MainNav = () => {
                                                     </li>
                                                     
                                                 }
-                                                 return <li className="nav-item" ><Link to={`/category/:${currElem.id}`}  >{currElem.name}</Link></li>
+                                                 return <li className="nav-item" ><Link to={`/category/${currElem.id}`}  >{currElem.name}</Link></li>
                                             
                                             })
                                         }
