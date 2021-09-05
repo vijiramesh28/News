@@ -2561,6 +2561,7 @@ ul.nav li.dropdown .utf_dropdown_menu li.utf_dropdown_submenu:hover .utf_dropdow
 	color: #fff;
 	background: #ec0000;
 	border: 1px solid transparent;
+	cursor:pointer;
 }
 .paging .page-numbers {
 	border: 0;

@@ -1,5 +1,6 @@
 import React from 'react'
 
+
 const SingleSlider = (props) => {
     return (
         <>
