@@ -43,7 +43,7 @@ const MainNav = () => {
                                                                 currElem.subcategories.map((sub,ind) => {
                                                                     return(
                                                                         <li key={sub.id} className="nav-link">
-                                                                        <Link to="/subcategory"><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
+                                                                        <Link to={`/category/${currElem.id}/${sub.id}`}><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
                                                                     </li>
                                                                     )
                                                                  
