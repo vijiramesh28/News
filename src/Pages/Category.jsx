@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
+import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import ReactPaginate from 'react-paginate'
 import Breadcrumb from "../Components/Category/pageTitle/Breadcrumb"
 import axios from "axios"
 import Adsidebar from '../images/banner-ads/ad-sidebar.png'
 import  OwlCarousel  from 'react-owl-carousel'
-import SingleSlider from '../Components/Home/NewsTabs/SingleSlider'
-import EntertainmentComp from '../Components/Category/Entertainment/EntertainmentComp'
-import LatNewsSlider from '../Components/Home/LatestNews/LatNewsSlider'
+
+
 
 
 const Category = () => {
-    const { catid } = useParams()
+    const { catid,subid } = useParams()
     const [Category, setCategory] = useState([])
-    const [pageCount, setPageCount] = useState(0)
+    const [updatedsubcat, setUpdatedsubcat] = useState([])
+    // const [pageCount, setPageCount] = useState(0)
 
 
     const GetPostData = async () => {
@@ -37,6 +38,15 @@ const Category = () => {
         console.log(numberofPages);
 
     }
+    // const filterlist = (subcat) =>{
+    //     const updatedList = Category.map((curElem)=>curElem.subcategories.filter((subcateg)=>{
+    //         return subcateg.name===subcat.name 
+           
+    //     }))
+    //     // setUpdatedsubcat(updatedList);
+    //     // return updatedList
+        
+    // }
 
     // const currentPosts = Category.slice(indexOfLastPost,indexOfFirstPost)
     // console.log(currentPosts);
@@ -44,11 +54,11 @@ const Category = () => {
     return (
         <>
             {
-                Category.filter(cards => cards.id === parseInt(catid)).map((curElem, ind) => {
+                Category.filter(cards => cards.id === parseInt(catid)).map((curElem, ind) =>  {
 
                     return (
                         <>
-                            <Breadcrumb categoryname={curElem.name} />
+                            <Breadcrumb categoryname={curElem.name}  />
 
 
                             <section className="utf_block_wrapper">
@@ -59,17 +69,17 @@ const Category = () => {
                                                 <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
                                                 <ul className="subCategory unstyled">
                                                     {
-                                                        curElem.subcategories.map((subcategories, ind) => {
+                                                        curElem.subcategories.map((subcategories) => {
                                                             return (
-                                                                <li><a href="/">{subcategories.name}</a></li>
+                                                                <li key={subcategories.id} ><a style={{"cursor":"pointer"}} >{subcategories.name}</a></li>
                                                             )
 
                                                         })}
 
                                                 </ul>
                                                 {
-
-                                                    curElem.posts.map((post, ind) => {
+                                                   
+                                                curElem.posts.map((post, ind) => {
 
                                                         const postdate = post.updated_at;
                                                         const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
@@ -79,11 +89,11 @@ const Category = () => {
                                                         return (
                                                             <div className="utf_post_block_style utf_post_float_half clearfix">
                                                                 <div className="utf_post_thumb">
-                                                                    <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a>
+                                                                    <Link strict to={`post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
                                                                 </div>
                                                                 <a className="utf_post_cat" href="/">{curElem.name}</a>
                                                                 <div className="utf_post_content">
-                                                                    <h2 className="utf_post_title"><a href="post.html">{post.title}</a></h2>
+                                                                    <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
                                                                     <div className="utf_post_meta">
                                                                         <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
                                                                     </div>
@@ -139,9 +149,9 @@ const Category = () => {
                                                                     return (
                                                                         <li key={post.id} className="clearfix">
                                                                             <div className="utf_post_block_style post-float clearfix">
-                                                                                <div className="utf_post_thumb"> <a href="#"> <img className="img-fluid" src={postimg} alt="" /> </a> <a className="utf_post_cat" href="#">{curElem.name}</a> </div>
+                                                                                <div className="utf_post_thumb"> <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={postimg} alt="" /> </Link> <Link className="utf_post_cat" strict to={`catgeory/${curElem.id}`}>{curElem.name}</Link> </div>
                                                                                 <div className="utf_post_content">
-                                                                                    <h2 className="utf_post_title title-small"> <a href="post.html">{post.title}</a> </h2>
+                                                                                    <h2 className="utf_post_title title-small"> <Link strict to={`/post/${post.id}`}>{post.title}</Link> </h2>
                                                                                     <div className="utf_post_meta"> <span className="utf_post_author"><i className="fa fa-user"></i> <a href="#">{postmoddate}</a></span>  </div>
                                                                                 </div>
                                                                             </div>
@@ -177,11 +187,11 @@ const Category = () => {
                                                                     <div key={ind} className="item">
                                                                     <div className="utf_post_overaly_style text-center clearfix">
                                                                         <div className="utf_post_thumb">
-                                                                            <a href="#"> <img className="img-fluid" src={postimg} alt="" /> </a>
+                                                                            <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={postimg} alt="" /> </Link>
                                                                         </div>
                                                                         <div className="utf_post_content">
                                                                             <a className="utf_post_cat" href="#">{curElem.name}</a>
-                                                                            <h2 className="utf_post_title"><a href="#">{post.title}</a></h2>
+                                                                            <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
                                                                             <div className="utf_post_meta">
                                                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
                                                                             </div>

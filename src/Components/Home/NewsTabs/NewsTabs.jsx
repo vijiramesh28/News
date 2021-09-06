@@ -6,6 +6,7 @@ import TabLists from "./TabLists"
 import TabMainNews from "./TabMainNews"
 import Tabs from "./Tabs"
 import SingleSlider from "./SingleSlider"
+import { Link } from 'react-router-dom'
 
 
 
@@ -133,11 +134,11 @@ const NewsTabs = () => {
 
                                                     <div className="utf_post_overaly_style clearfix">
                                                         <div className="utf_post_thumb">
-                                                            <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a>
+                                                            <Link to={curElem.id}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
                                                         </div>
                                                         <div className="utf_post_content">
-                                                            <a className="utf_post_cat" href="/">{curElem.name}</a>
-                                                            <h2 className="utf_post_title"><a href="post.html">{post.title}</a></h2>
+                                                            <Link className="utf_post_cat" to={`post/${curElem.id}`}>{curElem.name}</Link>
+                                                            <h2 className="utf_post_title"><Link to={`post/${curElem.id}`}>{post.title}</Link></h2>
                                                             <div className="utf_post_meta">
                                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
                                                             </div>
@@ -159,7 +160,7 @@ const NewsTabs = () => {
                                                         <li className="clearfix">
                                                             <div className="utf_post_block_style post-float clearfix">
                                                                 <div className="utf_post_thumb">
-                                                                    <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a> <a className="utf_post_cat" href="/">{curElem.name}</a>
+                                                                    <Link to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link> <Link className="utf_post_cat" to={`post/${post.id}`}>{curElem.name}</Link>
                                                                 </div>
                                                                 <div className="utf_post_content">
                                                                     <h2 className="utf_post_title clamped title-small"><a href="post.html">{post.title}</a></h2>

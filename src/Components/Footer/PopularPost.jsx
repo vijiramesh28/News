@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import dateFormat from 'dateformat'
+import { Link } from 'react-router-dom'
 
 
 
@@ -38,13 +39,13 @@ const PopularPost = () => {
                                 const postdate = post.updated_at;
                                 const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
                                 return(
-                                    <li className="clearfix">
+                                    <li key={post.id} className="clearfix">
                                     <div className="utf_post_block_style post-float clearfix">
                                         <div className="utf_post_thumb">
-                                            <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a>
+                                            <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
                                         </div>
                                         <div className="utf_post_content">
-                                            <h2 className="utf_post_title clamped title-small"><a href="post.html">{post.title}</a></h2>
+                                            <h2 className="utf_post_title clamped title-small"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
                                             <div className="utf_post_meta">
                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
                                             </div>

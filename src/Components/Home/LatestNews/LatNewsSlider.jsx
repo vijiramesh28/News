@@ -2,6 +2,7 @@ import axios from 'axios'
 import React,{useState, useEffect} from 'react'
 import dateFormat from 'dateformat'
 import OwlCarousel  from 'react-owl-carousel'
+import { Link } from 'react-router-dom'
 
 
 const LatNewsSlider = () => {
@@ -36,9 +37,9 @@ const LatNewsSlider = () => {
                                 <li className="clearfix">
                                     <div className="utf_post_block_style clearfix">
                                         <div className="utf_post_thumb">
-                                            <a href="/"><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} width="50px" alt="" /></a>
+                                            <Link to={`post/${post.id}`}><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} width="50px" alt="" /></Link>
                                         </div>
-                                        <a className="utf_post_cat" href="/">{currElem.name}</a>
+                                        <Link className="utf_post_cat" to={`post/${post.id}`}>{currElem.name}</Link>
                                         <div className="utf_post_content">
                                             <h2 className="utf_post_title clamped title-medium"><a href="post.html">{post.title}</a></h2>
                                             <div className="utf_post_meta">

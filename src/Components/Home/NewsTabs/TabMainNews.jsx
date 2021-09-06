@@ -1,4 +1,5 @@
 import dateFormat from 'dateformat'
+import { Link } from 'react-router-dom';
 
 const TabMainNews = ({postData}) => {
     return (
@@ -10,11 +11,11 @@ const TabMainNews = ({postData}) => {
                 return(
                     <div className="utf_post_block_style clearfix">
                 <div className="utf_post_thumb">
-                    <a href="/"> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </a>
+                    <Link to={`post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
                 </div>
-                <a className="utf_post_cat" href="/">{curElem.name}</a>
+                <Link className="utf_post_cat" to={`post/${post.id}`}>{curElem.name}</Link>
                 <div className="utf_post_content">
-                    <h2 className="utf_post_title"><a href="/">{post.title}</a></h2>
+                    <h2 className="utf_post_title"><Link to={`post/${post.id}`}>{post.title}</Link></h2>
                     <div className="utf_post_meta">
                         <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
                     </div>

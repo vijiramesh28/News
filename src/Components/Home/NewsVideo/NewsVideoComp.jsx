@@ -11,7 +11,7 @@ const NewsVideoComp = ({videoThumbnail,alt,videoplay,VideoTitle,VideoReleaseDate
                                     </a>
                                 </div>
                                 <div className="utf_post_content">
-                                    <h2 className="utf_post_title"><a href="/">{VideoTitle}</a></h2>
+                                    <h2 className="utf_post_title"><a href={videoplay}>{VideoTitle}</a></h2>
                                     <div className="utf_post_meta">
                                         <span className="utf_post_date"><i className="fa fa-clock-o"></i>{VideoReleaseDate}</span>
                                     </div>

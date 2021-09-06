@@ -2,6 +2,7 @@ import React,{useState, useEffect} from 'react'
 import axios from 'axios'
 import Copyrights from './Footer/Copyrights'
 import PopularPost from './Footer/PopularPost'
+import { Link, NavLink } from 'react-router-dom'
 
 
 const Footer = () => {
@@ -62,7 +63,7 @@ const Footer = () => {
                                          
                                             return (
                                                 <li key={curElem.id}>
-                                                    <i className="fa fa-angle-double-right"></i><a href="/"><span className="catTitle">{curElem.name}</span><span className="catCounter"> {curElem.id}</span></a>
+                                                    <i className="fa fa-angle-double-right"></i><Link strict to={`/category/${curElem.id}`}><span className="catTitle">{curElem.name}</span><span className="catCounter"> ({curElem.posts.length})</span></Link>
                                                 </li>
                                             )
                                         })

@@ -81,7 +81,7 @@ const OtherNews = () => {
                                                     const postdate = post.updated_at;
                                                     const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
                                                     return(
-                                                        <PostRelatedNews key={ind}  postImg={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} categoryTitle={curElem.name} postTitle={post.title} postDate={postmoddate} postDetails={post.details.substring(0, 200) + "..."}  />
+                                                        <PostRelatedNews key={post.id}  postImg={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} categoryTitle={curElem.name} postTitle={post.title} postDate={postmoddate} postDetails={post.details.substring(0, 200) + "..."}  />
                                                     )
                                                 }))
                                                  

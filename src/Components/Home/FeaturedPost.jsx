@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import OwlCarousel from 'react-owl-carousel'
 
@@ -41,8 +42,8 @@ const FeaturedPost = () => {
                                                 <div className="item" style={{ "backgroundImage": `url('https://wcprojects.in/public/media/posts/img1/${post.img_1}')` }}>
                                                     <div className="utf_featured_post">
                                                         <div className="utf_post_content">
-                                                            <a className="utf_post_cat" href="/">{currElem.name}</a>
-                                                            <h2 className="utf_post_title clamped title-extra-large"><a href="post.html">{post.title}</a></h2>
+                                                            <Link to={`/post/${post.id}`} className="utf_post_cat" >{currElem.name}</Link>
+                                                            <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${post.id}`}>{post.title}</Link></h2>
                                                             <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
                                                         </div>
                                                     </div>
@@ -73,10 +74,10 @@ const FeaturedPost = () => {
                                                             <div className="col-md-12">
                                                             <div className="utf_post_overaly_style text-center first clearfix">
                                                                 <div className="utf_post_thumb">
-                                                                    <a href="/"><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${posts.img_1}`}  alt="" /></a>
+                                                                    <Link to={`/post/${posts.id}`}><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${posts.img_1}`}  alt="" /></Link>
                                                                 </div>
                                                                 <div className="utf_post_content">
-                                                                    <a className="utf_post_cat" href="/">{curElem.name}</a>
+                                                                    <Link to={`/post/${posts.id}`} className="utf_post_cat" >{curElem.name}</Link>
                                                                     <h2 className="utf_post_title clamped title-medium"><a href="post.html">{posts.title}</a></h2>
                                                                     <div className="utf_post_meta">
                                                                         <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
@@ -89,35 +90,6 @@ const FeaturedPost = () => {
                                     }))
                                 }
 
-                            {/* <div className="col-md-12">
-                                <div className="utf_post_overaly_style text-center first clearfix">
-                                    <div className="utf_post_thumb">
-                                        <a href="/"><img className="img-fluid" src="images/news/tech/gadget2.jpg" alt="" /></a>
-                                    </div>
-                                    <div className="utf_post_content">
-                                        <a className="utf_post_cat" href="/">Lifestyle</a>
-                                        <h2 className="utf_post_title clamped title-medium"><a href="post.html">Samsung Gear S3 review: A whimper, when…</a></h2>
-                                        <div className="utf_post_meta">
-                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-md-12">
-                                <div className="utf_post_overaly_style text-center clearfix">
-                                    <div className="utf_post_thumb">
-                                        <a href="/"><img className="img-fluid" src="images/news/tech/game1.jpg" alt="" /></a>
-                                    </div>
-                                    <div className="utf_post_content">
-                                        <a className="utf_post_cat" href="/">Games</a>
-                                        <h2 className="utf_post_title clamped title-medium"><a href="post.html">Historical heroes and robot dinosaurs: New games...</a></h2>
-                                        <div className="utf_post_meta">
-                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i> 25 Jan, 2021</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> */}
                         </div>
                     </div>
                 </div>
