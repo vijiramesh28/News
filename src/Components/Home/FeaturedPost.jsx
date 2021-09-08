@@ -8,6 +8,7 @@ import OwlCarousel from 'react-owl-carousel'
 
 const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
+    const[loading, setLoading] = useState(false)
     const[sidepost,setSidepost] =useState([])
 
     const GetPostData = async () => {
@@ -15,6 +16,7 @@ const FeaturedPost = () => {
         console.log(res.data.language.categories)
         setLatestNews(res.data.language.categories)
         setSidepost(res.data.language.categories)
+        setLoading(true)
     }
     useEffect(() => {
         GetPostData()
@@ -22,14 +24,17 @@ const FeaturedPost = () => {
 
     }, [])
     return (
+<>
 
+
+       
 
         <section className="utf_featured_post_area pt-4">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-8 col-md-12 pad-r">
-
-                        {
+                        {loading ? (
+                        
                             LatestNews.length && (
                                 <OwlCarousel items={1} responsiveRefreshRate={200} lazyLoad loop={true} autoplay={true} arrow={true} dots={false} className="owl-carousel owl-theme utf_featured_slider content-bottom" id="utf_featured_slider" >
 
@@ -57,7 +62,10 @@ const FeaturedPost = () => {
                                     }
                                 </OwlCarousel>
                             )
-                        }
+                                
+                        ):( <div className="spinner-border text-danger">
+                        <span className="visually-hidden">Loading...</span>
+                        </div>)}
 
                     </div>
 
@@ -95,9 +103,9 @@ const FeaturedPost = () => {
                 </div>
             </div>
         </section>
+                        
 
-
-
+</>
     )
 }
 

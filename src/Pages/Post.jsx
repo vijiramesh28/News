@@ -6,6 +6,7 @@ import Breadcrumb from "../Components/Category/pageTitle/Breadcrumb"
 import axios from "axios"
 // import Adsidebar from '../images/banner-ads/ad-sidebar.png'
 import OwlCarousel from 'react-owl-carousel'
+import { Helmet } from 'react-helmet'
 
 const Post = () => {
     const { postid } = useParams()
@@ -34,6 +35,10 @@ const Post = () => {
                     if (post.id === parseInt(postid)) {
                         return (
                             <>
+                            <Helmet>
+                                <title>{post.meta_title}</title>
+                                <meta name="description" content={post.meta_desc} />
+                            </Helmet>
                                 <Breadcrumb categoryname={category.name} />
 
 
