@@ -63,9 +63,9 @@ const FeaturedPost = () => {
                                 </OwlCarousel>
                             )
                                 
-                        ):( <div className="spinner-border text-danger">
-                        <span className="visually-hidden">Loading...</span>
-                        </div>)}
+                        ):( 
+                        <span className="visually-hidden text-danger">Loading...</span>
+                     )}
 
                     </div>
 

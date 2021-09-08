@@ -7,11 +7,13 @@ import { Link } from 'react-router-dom'
 
 const LatNewsSlider = () => {
     const [LatestNews, setLatestNews] = useState([])
+    const [loading,setLoading] = useState(false)
 
     const GetPostData = async () => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setLatestNews(res.data.language.categories)
+        setLoading(true)
     }
     useEffect(() => {
         GetPostData()
@@ -20,7 +22,9 @@ const LatNewsSlider = () => {
     }, [])
     return (
         <>
-        {
+        {   loading?(
+        
+         
             LatestNews.length && (
             <OwlCarousel className="owl-carousel owl-theme utf_latest_news_slide" items={4} responsiveRefreshRate={200} lazyLoad loop={true} arrow={true} dots={false} margin={10} nav  id="utf_latest_news_slide"  >
             {
@@ -61,7 +65,7 @@ const LatNewsSlider = () => {
     
            </OwlCarousel>
            )
-        }
+           ):(<span className="visually-hidden text-danger">Loading...</span>)}
         
        </>
     )

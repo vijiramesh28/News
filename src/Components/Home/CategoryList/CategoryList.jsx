@@ -5,11 +5,13 @@ import instance from '../../../Api/axios'
 const CategoryList = () => {
  
     const [postdata, setPostData] = useState([])
+    const [loading,setLoading] = useState(false)
     
     const getPostData = async() =>{
        const res =  await instance.get('https://wcprojects.in/api/english')
        console.log(res.data.language);
        setPostData(res.data.language.categories)
+       setLoading(true)
     }
  
     useEffect(() => {
@@ -25,8 +27,10 @@ const CategoryList = () => {
             <section className="utf_block_wrapper p-top-0 p-bottom-0">
                 <div className="container">
                     <div className="row">
-
                         {
+                            loading?(
+
+                        
                            postdata.slice(0,3).map((currElem, index)=>{
                                
                                   return(
@@ -98,6 +102,7 @@ const CategoryList = () => {
                                
 
                             })
+                            ):(<span className="visually-hidden text-danger">Loading...</span>)
                         }
                         
                         
