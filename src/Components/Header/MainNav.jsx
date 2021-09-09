@@ -35,7 +35,8 @@ const MainNav = () => {
                                 <div id="navbarSupportedContent" className="collapse navbar-collapse navbar-responsive-collapse">
                                     <ul className="nav navbar-nav">
                                         
-                                        <li className="nav-item active"  ><Link to="/">Home</Link></li>
+                                        <li className="nav-item" onClick={() => handleOnClick(-1)} 
+                                                    className={activeIndex === -1 ? "active" : ""} ><Link to="/">Home</Link></li>
 
                                         {
                                             menus.map((currElem, id) => {
