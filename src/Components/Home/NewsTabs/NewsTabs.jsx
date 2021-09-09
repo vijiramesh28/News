@@ -89,7 +89,7 @@ const NewsTabs = () => {
                                         </div>
                                     )
                                 })
-                                ):(<span className="visually-hidden text-danger">Loading...</span>)
+                                ):( <div className="spinner-border"></div>)
                             }
 
                             <div className="gap-30"></div>
@@ -125,7 +125,7 @@ const NewsTabs = () => {
 
                                             </OwlCarousel>
                                         )
-                                        ):(<span className="visually-hidden text-danger">Loading...</span>)
+                                        ):( <div className="spinner-border"></div>)
                                     }
 
                                 </div>

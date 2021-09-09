@@ -222,7 +222,7 @@ const Category = () => {
                         </>
                     )
                 })
-                ):(<span className="visually-hidden text-danger">Loading...</span>)
+                ):( <div className="spinner-border"></div>)
             }
 
 
