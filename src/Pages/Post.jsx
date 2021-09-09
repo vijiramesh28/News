@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet'
 const Post = () => {
     const { postid } = useParams()
     const [Category, setCategory] = useState([])
+    const[loading,setLoading] = useState(false)
     // const [updatedsubcat, setUpdatedsubcat] = useState([])
     // const [pageCount, setPageCount] = useState(0)
 
@@ -19,6 +20,7 @@ const Post = () => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setCategory(res.data.language.categories)
+        setLoading(true)
     }
     useEffect(() => {
         GetPostData()
@@ -27,18 +29,23 @@ const Post = () => {
     }, [])
     return (
         <>
-            {
+            {loading?(
                 Category.map((category, ind) => category.posts.map((post, ind) => {
-                    const postdate =  post.updated_at;
-                    const postmoddate = dateFormat(postdate,"dd mmmm , yyyy");
+                    const postdate = post.updated_at;
+                    const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
                     console.log(post);
                     if (post.id === parseInt(postid)) {
                         return (
                             <>
-                            <Helmet>
-                                <title>{post.meta_title}</title>
-                                <meta name="description" content={post.meta_desc} />
-                            </Helmet>
+                                <Helmet>
+                                    <title>{post.meta_title}</title>
+                                    <meta name="description" content={post.meta_desc} />
+                                    <meta property="og:type" content="website" />
+                                    <meta property="og:image" content={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} />
+                                    <meta property="og:title" content={post.title} />
+                                    <meta property="og:description" content={post.meta_desc} />
+                                    {/* <meta property="og:url" content="https://www.colbyfayock.com" /> */}
+                                </Helmet>
                                 <Breadcrumb categoryname={category.name} />
 
 
@@ -48,16 +55,16 @@ const Post = () => {
                                         <div className="row">
                                             <div className="col-lg-8 col-md-12">
                                                 <div className="single-post">
-                                                <div className="utf_post_title-area">
-                                                    {
-                                                        category.subcategories.map((subcat,ind)=>{
-                                                            console.log(subcat);
-                                                            return(
-                                                               <a className="utf_post_cat" href="/">{subcat.name}</a>
-                                                            )
-                                                        })
-                                                    }
-                                                  
+                                                    <div className="utf_post_title-area">
+                                                        {
+                                                            category.subcategories.map((subcat, ind) => {
+                                                                console.log(subcat);
+                                                                return (
+                                                                    <a className="utf_post_cat" href="/">{subcat.name}</a>
+                                                                )
+                                                            })
+                                                        }
+
                                                         <h2 className="utf_post_title">{post.title}</h2>
                                                         <div className="utf_post_meta"> <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span> <span className="post-hits"><i className="fa fa-eye"></i>{post.views}</span> </div>
                                                     </div>
@@ -71,7 +78,7 @@ const Post = () => {
                                                         </div>
                                                         <div className="entry-content">
                                                             <p>{post.details}</p>
-                                                            
+
                                                         </div>
 
                                                         <div className="tags-area clearfix">
@@ -113,26 +120,26 @@ const Post = () => {
                                                 <div className="related-posts block">
                                                     <h3 className="utf_block_title"><span>Related Posts</span></h3>
                                                     <OwlCarousel items={4} responsiveRefreshRate={200} lazyLoad loop={true} arrow={true} dots={false} margin={10} nav id="utf_latest_news_slide" className="owl-carousel owl-theme utf_latest_news_slide">
-                                                        
+
                                                         {
-                                                            Category.slice(0,1).map((category)=>category.posts.slice(0,10).map((post)=>{
-                                                                const postdate =  post.updated_at
-                                                                const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
-                                                                return(
+                                                            Category.slice(0, 1).map((category) => category.posts.slice(0, 10).map((post) => {
+                                                                const postdate = post.updated_at
+                                                                const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
+                                                                return (
                                                                     <div key={post.id} className="item">
-                                                                    <div className="utf_post_block_style clearfix">
-                                                                        <div className="utf_post_thumb"> <Link strict to={`post/${post.id}`} ><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /></Link> </div>
-                                                                        <Link strict to={`/post/${post.id}`} className="utf_post_cat">Health</Link>
-                                                                        <div className="utf_post_content">
-                                                                            <h2 className="utf_post_title title-medium"> <Link strict to={`/post/${post.id}`}>{post.title}</Link> </h2>
-                                                                            <div className="utf_post_meta"> <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span> </div>
+                                                                        <div className="utf_post_block_style clearfix">
+                                                                            <div className="utf_post_thumb"> <Link strict to={`post/${post.id}`} ><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /></Link> </div>
+                                                                            <Link strict to={`/post/${post.id}`} className="utf_post_cat">Health</Link>
+                                                                            <div className="utf_post_content">
+                                                                                <h2 className="utf_post_title title-medium"> <Link strict to={`/post/${post.id}`}>{post.title}</Link> </h2>
+                                                                                <div className="utf_post_meta"> <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span> </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
                                                                 )
                                                             }))
                                                         }
-  
+
                                                     </OwlCarousel>
                                                 </div>
 
@@ -146,33 +153,33 @@ const Post = () => {
 
                                                     <div className="widget color-default">
                                                         {
-                                                            Category.slice(0,1).map((category)=>{
-                                                                return(
+                                                            Category.slice(0, 1).map((category) => {
+                                                                return (
                                                                     <h3 className="utf_block_title"><span>{category.name}</span></h3>
                                                                 )
                                                             })
                                                         }
-                                                       
+
                                                         <div className="utf_list_post_block">
                                                             <ul className="utf_list_post">
                                                                 {
-                                                                    category.posts.slice(0,4).map((post,ind)=>{
-                                                                        const postdate =  post.updated_at
-                                                                        const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
-                                                                        return(
+                                                                    category.posts.slice(0, 4).map((post, ind) => {
+                                                                        const postdate = post.updated_at
+                                                                        const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
+                                                                        return (
                                                                             <li className="clearfix">
-                                                                            <div className="utf_post_block_style post-float clearfix">
-                                                                                <div className="utf_post_thumb"> <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link> <Link className="utf_post_cat" to={`post/${post.id}`}>{category.name}</Link> </div>
-                                                                                <div className="utf_post_content">
-                                                                                    <h2 className="utf_post_title title-small"> <Link strict to={`/post/${post.id}`} >{post.title}</Link> </h2>
-                                                                                    <div className="utf_post_meta">  <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span> </div>
+                                                                                <div className="utf_post_block_style post-float clearfix">
+                                                                                    <div className="utf_post_thumb"> <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link> <Link className="utf_post_cat" to={`post/${post.id}`}>{category.name}</Link> </div>
+                                                                                    <div className="utf_post_content">
+                                                                                        <h2 className="utf_post_title title-small"> <Link strict to={`/post/${post.id}`} >{post.title}</Link> </h2>
+                                                                                        <div className="utf_post_meta">  <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span> </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                        </li>
+                                                                            </li>
                                                                         )
                                                                     })
                                                                 }
-                                                               
+
 
                                                             </ul>
                                                         </div>
@@ -200,37 +207,37 @@ const Post = () => {
                                                     <div className="widget text-center"> <img className="banner img-fluid" src="images/banner-ads/ad-sidebar.png" alt="" /> </div>
                                                     <div className="widget color-default">
                                                         {
-                                                            Category.slice(5,6).map((categ,ind)=>{
-                                                                return(
+                                                            Category.slice(5, 6).map((categ, ind) => {
+                                                                return (
                                                                     <h3 className="utf_block_title"><span>{categ.name}</span></h3>
                                                                 )
                                                             })
                                                         }
-                                                       
+
                                                         <OwlCarousel items={1} arrow={true} dots={false} nav id="utf_post_slide" className="owl-carousel owl-theme utf_post_slide">
                                                             {
-                                                                Category.slice(5,6).map((category)=>category.posts.slice(0,7).map((post,ind)=>{
-                                                                    const postdate =  post.updated_at
-                                                                    const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
-                                                                    return(
+                                                                Category.slice(5, 6).map((category) => category.posts.slice(0, 7).map((post, ind) => {
+                                                                    const postdate = post.updated_at
+                                                                    const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
+                                                                    return (
                                                                         <div key={ind} className="item">
-                                                                        <div className="utf_post_overaly_style text-center clearfix">
-                                                                            <div className="utf_post_thumb">
-                                                                                <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
-                                                                            </div>
-                                                                            <div className="utf_post_content">
-                                                                                <Link strict  to={`/post/${post.id}`} className="utf_post_cat">{category.name}</Link>
-                                                                                <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
-                                                                                <div className="utf_post_meta">
-                                                                                    <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
+                                                                            <div className="utf_post_overaly_style text-center clearfix">
+                                                                                <div className="utf_post_thumb">
+                                                                                    <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
+                                                                                </div>
+                                                                                <div className="utf_post_content">
+                                                                                    <Link strict to={`/post/${post.id}`} className="utf_post_cat">{category.name}</Link>
+                                                                                    <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
+                                                                                    <div className="utf_post_meta">
+                                                                                        <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
+                                                                                    </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
                                                                     )
                                                                 }))
                                                             }
-                                                         
+
 
                                                         </OwlCarousel>
                                                     </div>
@@ -249,6 +256,7 @@ const Post = () => {
                     }
 
                 }))
+                ):(<span className="visually-hidden text-danger">Loading...</span>)
             }
         </>
     )

@@ -5,6 +5,7 @@ import instance from "../../Api/axios"
 const MainNav = () => {
 
     const [menus, setMenus] = useState([])
+    const [activeIndex,setActiveIndex] = useState(0)
 
     const GetMenusApi = async () => {
         const res = await instance.get('/categories')
@@ -16,6 +17,9 @@ const MainNav = () => {
         GetMenusApi()
     }, [])
 
+    const handleOnClick = index => {
+        setActiveIndex(index); // remove the curly braces
+      };
     
     return (
         <>
@@ -30,19 +34,21 @@ const MainNav = () => {
                                 </button>
                                 <div id="navbarSupportedContent" className="collapse navbar-collapse navbar-responsive-collapse">
                                     <ul className="nav navbar-nav">
-                                        <li className="nav-item active"><Link to="/">Home</Link></li>
+                                        
+                                        <li className="nav-item active"  ><Link to="/">Home</Link></li>
 
                                         {
                                             menus.map((currElem, id) => {
 
                                                 if (currElem.subcategories.length !==0) {
-                                                    return <li key={currElem.id} className="nav-item dropdown ">
-                                                        <Link to={`/category/${currElem.id}`} className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
+                                                    return <li key={currElem.id} className="nav-item dropdown" onClick={() => handleOnClick(currElem.id)}
+                                                    className={activeIndex === currElem.id ? "active" : ""} >
+                                                        <Link to={`/category/${currElem.id}`}  className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
                                                         <ul className="utf_dropdown_menu" role="menu">
                                                             {
                                                                 currElem.subcategories.map((sub,ind) => {
                                                                     return(
-                                                                        <li key={sub.id} className="nav-link">
+                                                                        <li key={sub.id} className="nav-link" >
                                                                         <Link to={`/category/${currElem.id}/${sub.id}`}><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
                                                                     </li>
                                                                     )
@@ -55,7 +61,8 @@ const MainNav = () => {
                                                     </li>
                                                     
                                                 }
-                                                 return <li className="nav-item" ><Link to={`/category/${currElem.id}`}  >{currElem.name}</Link></li>
+                                                 return <li className="nav-item" onClick={() => handleOnClick(currElem.id)}
+                                                 className={activeIndex === currElem.id ? "active" : ""}  ><Link to={`/category/${currElem.id}`}  >{currElem.name}</Link></li>
                                             
                                             })
                                         }

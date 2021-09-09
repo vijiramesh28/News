@@ -14,6 +14,7 @@ import  OwlCarousel  from 'react-owl-carousel'
 const Category = () => {
     const { catid,subid } = useParams()
     const [Category, setCategory] = useState([])
+    const[loading,setLoading] = useState(false)
     const [updatedsubcat, setUpdatedsubcat] = useState([])
     // const [pageCount, setPageCount] = useState(0)
 
@@ -22,6 +23,7 @@ const Category = () => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setCategory(res.data.language.categories)
+        setLoading(true)
     }
     useEffect(() => {
         GetPostData()
@@ -53,7 +55,7 @@ const Category = () => {
 
     return (
         <>
-            {
+            {loading?(
                 Category.filter(cards => cards.id === parseInt(catid)).map((curElem, ind) =>  {
 
                     return (
@@ -220,6 +222,7 @@ const Category = () => {
                         </>
                     )
                 })
+                ):(<span className="visually-hidden text-danger">Loading...</span>)
             }
 
 

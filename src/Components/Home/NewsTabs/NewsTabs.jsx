@@ -13,6 +13,7 @@ import { Link } from 'react-router-dom'
 
 const NewsTabs = () => {
     const [Singleposts, setSingleposts] = useState([])
+    const[loading, setLoading]=useState(false)
     // const [submenuList,setSubmenulist] =useState(uniqueSubcategory)
 
 
@@ -21,6 +22,7 @@ const NewsTabs = () => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setSingleposts(res.data.language.categories)
+        setLoading(true)
     }
     useEffect(() => {
         GetPostData()
@@ -53,6 +55,8 @@ const NewsTabs = () => {
                         <div className="col-lg-8 col-md-12">
 
                             {
+                                loading?(
+                            
                                 Singleposts.slice(0, 2).map((curElem,ind) => {
                                     return (
                                         <div className="utf_featured_tab color-default">
@@ -85,6 +89,7 @@ const NewsTabs = () => {
                                         </div>
                                     )
                                 })
+                                ):(<span className="visually-hidden text-danger">Loading...</span>)
                             }
 
                             <div className="gap-30"></div>
@@ -96,14 +101,15 @@ const NewsTabs = () => {
                                 <div className="widget color-default">
 
                                     {
+                                    
                                         Singleposts.slice(0, 1).map((curElem, ind) => {
                                             return (
                                                 <h3 key={ind} className="utf_block_title"><span>{curElem.name}</span></h3>
                                             )
                                         })
-                                    }
+                                        }
 
-                                    {
+                                    {loading?(
                                         Singleposts.length && (
                                             <OwlCarousel items={1} responsiveRefreshRate={200} lazyLoad loop={true} autoplay={true} dots={false} nav className="owl-carousel owl-theme utf_post_slide" id="utf_post_slide" >
                                                 {
@@ -119,6 +125,7 @@ const NewsTabs = () => {
 
                                             </OwlCarousel>
                                         )
+                                        ):(<span className="visually-hidden text-danger">Loading...</span>)
                                     }
 
                                 </div>

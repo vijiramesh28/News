@@ -7,11 +7,13 @@ import PostRelatedNews from './PostRelatedNews'
 
 const OtherNews = () => {
     const [OtherNews, setOtherNews] = useState([])
+    const[loading, setLoading] =useState(false)
 
     const GetPostData = async () => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories)
         setOtherNews(res.data.language.categories)
+        setLoading(true)
 
     }
     useEffect(() => {
@@ -36,7 +38,7 @@ const OtherNews = () => {
                                     })
                                 }
 
-                                {
+                                {loading?(
                                     OtherNews.length && (
                                         <OwlCarousel className="owl-carousel owl-theme utf_more_news_slide" items={1}  responsiveRefreshRate={200} lazyLoad dots={true}  id="utf_more_news_slide">
 
@@ -56,6 +58,7 @@ const OtherNews = () => {
 
                                         </OwlCarousel>
                                     )
+                                    ):(<span className="visually-hidden text-danger">Loading...</span>)
                                 }
 
                             </div>
