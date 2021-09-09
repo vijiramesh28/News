@@ -2557,6 +2557,56 @@ ul.nav li.dropdown .utf_dropdown_menu li.utf_dropdown_submenu:hover .utf_dropdow
 	line-height: 25px;
 	font-weight: 600;
 }
+/* .owl-next,.owl-prev{
+	padding: 5px 10px;
+	border-radius:15px;
+	border:1px solid #dedede;
+	color:#999;
+}
+
+.owl-prev span,.owl-next span{
+	padding: 5px 10px;
+	border-radius:15px;
+	border:1px solid #dedede;
+	color:#999;
+	outline:none;
+} */
+
+.owl-nav span{
+	padding: 4px 12px;
+	border:1px solid #dedede;
+	border-radius:15px;
+	outline:none;
+	font-size: 15px;
+	transition:0.3s;
+}
+.owl-nav span:hover{
+	border-radius:15px !important;
+	background: red !important;
+	color:#fff;
+	border:0;
+	outline: 0;
+	font-size: 15px;
+}
+button.owl-prev:hover{
+	background: white !important;
+}
+button.owl-next:hover{
+	background: white !important;
+}
+button.owl-prev:focus{
+	background: white !important;
+	border:0;
+	outline: 0;
+}
+button.owl-next:focus{
+	background: none;
+	border:0;
+	outline: 0;
+}
+
+
+
 .pagination>.active>a, .pagination>.active>a:hover, .pagination>li>a:hover {
 	color: #fff;
 	background: #ec0000;

@@ -26,7 +26,7 @@ const LatNewsSlider = () => {
         
          
             LatestNews.length && (
-            <OwlCarousel className="owl-carousel owl-theme utf_latest_news_slide" items={4} responsiveRefreshRate={200} lazyLoad loop={true} arrow={true} dots={false} margin={10} nav  id="utf_latest_news_slide"  >
+            <OwlCarousel className="owl-theme owl-carousel utf_latest_news_slide utf_post_slide cust_nav" items={4} responsiveRefreshRate={200} lazyLoad loop={true} arrow={true} dots={false} margin={10} nav  id="utf_latest_news_slide"  >
             {
                 
                 LatestNews.map((currElem,ind)=>currElem.posts.map((post,ind)=>{

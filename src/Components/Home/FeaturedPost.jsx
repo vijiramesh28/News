@@ -6,6 +6,7 @@ import OwlCarousel from 'react-owl-carousel'
 
 
 
+
 const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
     const[loading, setLoading] = useState(false)
@@ -64,7 +65,9 @@ const FeaturedPost = () => {
                             )
                                 
                         ):( 
-                        <span className="visually-hidden text-danger">Loading...</span>
+                             
+                            <span className="text-danger">Loading...</span>
+                              
                      )}
 
                     </div>

@@ -28,7 +28,7 @@ const Topbar = () => {
                             <ul className="unstyled top-nav">
                                 {
                                     LangName.map((curElem, ind)=>{
-                                        return <li key={ind} ><NavLink to="/">{curElem.name}</NavLink></li>
+                                        return <li key={ind}><NavLink to="/" activeClassName="active">{curElem.name}</NavLink></li>
                                     })
                                 }
                                 
