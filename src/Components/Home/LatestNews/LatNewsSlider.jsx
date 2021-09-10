@@ -65,7 +65,10 @@ const LatNewsSlider = () => {
     
            </OwlCarousel>
            )
-           ):( <div className="spinner-border"></div>)}
+           ):( <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+           <rect width="400" height="300" fill="#fcfcfc"></rect>
+           <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>   
+       </svg></div>)}
         
        </>
     )
