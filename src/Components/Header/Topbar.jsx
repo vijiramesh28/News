@@ -1,23 +1,20 @@
-import { useTranslation } from "react-i18next"
-import { NavLink } from "react-router-dom"
+import React, { useContext } from 'react'
+import { translate } from '../../Context/translate.context'
+
+// import translate from '../../Context/translate.context'
+// import { NavLink } from "react-router-dom"
 import TopbarSocial from "./TopbarSocial"
 
-const LangName = [{
-    code:'en',
-    name:'English'
-},
-{
-    code:'mr',
-    name:'Marathi'
-},
-{
-    code:'hi',
-    name:'Hindi'
+const translateLang= (t)=>{
+    localStorage.setItem("language","eng")
+    localStorage.setItem("language",t)
+    window.location.reload(true)
+    // console.log(`you have clicked language ${tr}`)
 }
-]
+
 // onClick={()=>t.changeLanguage(curElem.code) }
 const Topbar = () => {
-    const { t } = useTranslation()
+    const langu = useContext(translate)
     return (
         <>
             {/* <!-- Topbar Start --> */}
@@ -26,13 +23,11 @@ const Topbar = () => {
                     <div className="row">
                         <div className="col-md-8">
                             <ul className="unstyled top-nav">
-                                {
-                                    LangName.map((curElem, ind)=>{
-                                        return <li key={ind}><NavLink to="/" activeClassName="active">{curElem.name}</NavLink></li>
-                                    })
-                                }
-                                
-                             
+                                <li><a class="active" style={{"cursor":"pointer"}} onClick={()=>translateLang(langu.English.code)}>English</a></li>
+                                <li><a style={{"cursor":"pointer"}} onClick={()=>translateLang(langu.Marathi.code)}>Marathi</a></li>
+                                <li><a style={{"cursor":"pointer"}}  onClick={()=>translateLang(langu.Hindi.code)}>Hindi</a></li>
+
+
                             </ul>
                         </div>
                         <TopbarSocial />

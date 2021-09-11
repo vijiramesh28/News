@@ -8,14 +8,25 @@ import { Link, NavLink } from 'react-router-dom'
 const Footer = () => {
     const [categories, setCategories] = useState([])
 
-    const GetMenusApi = async () => {
-        const res = await axios.get('https://wcprojects.in/api/english')
+    const GetMenusApi = async (t) => {
+      if(t!=null)
+      {
+        const res = await axios.get(`https://wcprojects.in/api/${t}/categories`)
         console.log(res.data.language.categories);
         setCategories(res.data.language.categories)
+      }
+      else{
+        const res = await axios.get(`https://wcprojects.in/api/eng/categories`)
+        console.log(res.data.language.categories);
+        setCategories(res.data.language.categories)
+      }
+        
+        
     }
 
     useEffect(() => {
-        GetMenusApi()
+        const langData = localStorage.getItem("language")
+        GetMenusApi(langData)
     }, [])
     return (
         <>
@@ -63,7 +74,8 @@ const Footer = () => {
                                          
                                             return (
                                                 <li key={curElem.id}>
-                                                    <i className="fa fa-angle-double-right"></i><Link strict to={`/category/${curElem.id}`}><span className="catTitle">{curElem.name}</span><span className="catCounter"> ({curElem.posts.length})</span></Link>
+                                                    <i className="fa fa-angle-double-right"></i><Link strict to={`/category/${curElem.id}`}><span className="catTitle">{curElem.name}</span>
+                                                    <span className="catCounter"> xx</span></Link>
                                                 </li>
                                             )
                                         })

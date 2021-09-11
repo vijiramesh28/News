@@ -12,6 +12,7 @@ const PopularPost = () => {
     const [LatestNews, setLatestNews] = useState([])
 
     const GetPostData = async () => {
+       
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data);
         setLatestNews(res.data.language.categories)
