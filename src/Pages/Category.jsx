@@ -6,15 +6,15 @@ import ReactPaginate from 'react-paginate'
 import Breadcrumb from "../Components/Category/pageTitle/Breadcrumb"
 import axios from "axios"
 import Adsidebar from '../images/banner-ads/ad-sidebar.png'
-import  OwlCarousel  from 'react-owl-carousel'
+import OwlCarousel from 'react-owl-carousel'
 
 
 
 
 const Category = () => {
-    const { catid,subid } = useParams()
+    const { catid, subid } = useParams()
     const [Category, setCategory] = useState([])
-    const[loading,setLoading] = useState(false)
+    const [loading, setLoading] = useState(false)
     const [updatedsubcat, setUpdatedsubcat] = useState([])
     // const [pageCount, setPageCount] = useState(0)
 
@@ -43,11 +43,11 @@ const Category = () => {
     // const filterlist = (subcat) =>{
     //     const updatedList = Category.map((curElem)=>curElem.subcategories.filter((subcateg)=>{
     //         return subcateg.name===subcat.name 
-           
+
     //     }))
     //     // setUpdatedsubcat(updatedList);
     //     // return updatedList
-        
+
     // }
 
     // const currentPosts = Category.slice(indexOfLastPost,indexOfFirstPost)
@@ -56,11 +56,11 @@ const Category = () => {
     return (
         <>
             {loading?(
-                Category.filter(cards => cards.id === parseInt(catid)).map((curElem, ind) =>  {
+                Category.filter(cards => cards.id === parseInt(catid)).map((curElem, ind) => {
 
                     return (
                         <>
-                            <Breadcrumb categoryname={curElem.name}  />
+                            <Breadcrumb categoryname={curElem.name} />
 
 
                             <section className="utf_block_wrapper">
@@ -73,15 +73,18 @@ const Category = () => {
                                                     {
                                                         curElem.subcategories.map((subcategories) => {
                                                             return (
-                                                                <li key={subcategories.id} ><a style={{"cursor":"pointer"}} >{subcategories.name}</a></li>
+                                                                <li key={subcategories.id} ><a style={{ "cursor": "pointer" }} >{subcategories.name}</a></li>
                                                             )
 
-                                                        })}
+                                                        })
+                                                        
+                                                        
+                                                        }
 
                                                 </ul>
                                                 {
-                                                   
-                                                curElem.posts.map((post, ind) => {
+
+                                                    curElem.posts.map((post, ind) => {
 
                                                         const postdate = post.updated_at;
                                                         const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
@@ -104,6 +107,7 @@ const Category = () => {
                                                             </div>
                                                         )
                                                     })
+                                               
                                                 }
 
 
@@ -139,6 +143,7 @@ const Category = () => {
                                                                 <h3 key={ind} class="utf_block_title"><span>{curElem.name}</span></h3>
                                                             )
                                                         })
+                                                       
                                                     }
 
                                                     <div class="utf_list_post_block">
@@ -160,6 +165,7 @@ const Category = () => {
                                                                         </li>
                                                                     )
                                                                 }))
+                                                           
                                                             }
 
 
@@ -172,40 +178,42 @@ const Category = () => {
 
                                                 <div className="widget color-default">
                                                     {
-                                                        Category.slice(2,3).map((curElem,ind)=>{
-                                                            return(
+                                                        Category.slice(2, 3).map((curElem, ind) => {
+                                                            return (
                                                                 <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
                                                             )
                                                         })
+                                                       
                                                     }
-                                           
-                                                    <OwlCarousel items={1} nav dots={false}  className="owl-carousel owl-theme utf_post_slide" id="utf_post_slide">
+
+                                                    <OwlCarousel items={1} nav dots={false} className="owl-carousel owl-theme utf_post_slide" id="utf_post_slide">
                                                         {
-                                                            Category.slice(2,3).map((curElem,ind)=>curElem.posts.slice(0,5).map((post,ind)=>{
+                                                            Category.slice(2, 3).map((curElem, ind) => curElem.posts.slice(0, 5).map((post, ind) => {
                                                                 const postimg = `https://wcprojects.in/public/media/posts/img1/${post.img_1}`
-                                                                    const postdate = post.updated_at
-                                                                    const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
-                                                                return(
+                                                                const postdate = post.updated_at
+                                                                const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
+                                                                return (
                                                                     <div key={ind} className="item">
-                                                                    <div className="utf_post_overaly_style text-center clearfix">
-                                                                        <div className="utf_post_thumb">
-                                                                            <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={postimg} alt="" /> </Link>
-                                                                        </div>
-                                                                        <div className="utf_post_content">
-                                                                            <a className="utf_post_cat" href="#">{curElem.name}</a>
-                                                                            <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
-                                                                            <div className="utf_post_meta">
-                                                                                <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
+                                                                        <div className="utf_post_overaly_style text-center clearfix">
+                                                                            <div className="utf_post_thumb">
+                                                                                <Link strict to={`/post/${post.id}`}> <img className="img-fluid" src={postimg} alt="" /> </Link>
+                                                                            </div>
+                                                                            <div className="utf_post_content">
+                                                                                <a className="utf_post_cat" href="#">{curElem.name}</a>
+                                                                                <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
+                                                                                <div className="utf_post_meta">
+                                                                                    <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
                                                                 )
                                                             }))
-                                                        }
                                                        
+                                                        }
 
-                                                      
+
+
                                                     </OwlCarousel>
                                                 </div>
 
@@ -222,10 +230,11 @@ const Category = () => {
                         </>
                     )
                 })
-                ):( <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                ) : (<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
                 <rect width="400" height="300" fill="#fcfcfc"></rect>
-                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>   
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
             </svg></div>)
+
             }
 
 

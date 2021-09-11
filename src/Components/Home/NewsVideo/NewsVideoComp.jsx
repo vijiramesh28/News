@@ -1,12 +1,21 @@
+import React,{useState} from 'react'
+import ModalVideo from 'react-modal-video'
+
 
 const NewsVideoComp = ({videoThumbnail,alt,videoplay,VideoTitle,VideoReleaseDate}) => {
+    const [isOpen, setOpen] = useState(false)
     return (
         <>
+    
+        <ModalVideo channel='youtube' autoplay isOpen={isOpen} videoId={videoplay} onClose={() => setOpen(false)} />
+        
+        
                <div className="col-md-4">
                             <div className="utf_post_overaly_style text-center first clearfix mb-3 mb-md-0">
                                 <div className="utf_post_thumb video-btn">
                                     <img className="img-fluid" src={videoThumbnail} alt={alt}  />
-                                    <a className="popup" href={videoplay}>
+                                    
+                                    <a className="popup" onClick={()=> setOpen(true)}>
                                         <div className="video-icon"><i className="fa fa-play"></i></div>
                                     </a>
                                 </div>
