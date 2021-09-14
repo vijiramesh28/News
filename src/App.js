@@ -42,12 +42,11 @@ function App() {
     
     <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/category/:catid" component={Category} />
-        <Route exact path="/category/:catid/:subid" component={Category} />
-        {/* <Route exact path="/login" component={Login} /> */}
-        <Route  exact path="/post/:postid" component={Post} />
-        {/* <Route exact path="/subcategory" component={Subcategory} /> */}
+        <Route exact path="/category/:catid/:subname" component={Category} />
+        {/* <Route exact path="/category/:catid/:subid" component={Category} /> */}
+        <Route exact path="/post/:postid" component={Post} />
         <Route component={PageNotFound} />
+          {/* <Route exact path="/login" component={Login} /> */}
     </Switch>
     
     <Footer />

@@ -12,10 +12,12 @@ import OwlCarousel from 'react-owl-carousel'
 
 
 const Category = () => {
-    const { catid, subid } = useParams()
+    const { catid } = useParams()
+    const { subname } = useParams()
     const [Category, setCategory] = useState([])
+
     const [loading, setLoading] = useState(false)
-    const [updatedsubcat, setUpdatedsubcat] = useState([])
+    // const [updatedsubcat, setUpdatedsubcat] = useState([])
     // const [pageCount, setPageCount] = useState(0)
 
 
@@ -23,6 +25,7 @@ const Category = () => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setCategory(res.data.language.categories)
+        console.log(subname);
         setLoading(true)
     }
     useEffect(() => {
@@ -31,38 +34,35 @@ const Category = () => {
 
     }, [])
 
-    const handlepageclick = (data) => {
-        const pages = 4
-        const numberofPages = []
-        for (let i = 1; i < pages; i++) {
-            numberofPages.push(i)
-        }
-        console.log(numberofPages);
+    // const handlepageclick = (data) => {
+    //     const pages = 4
+    //     const numberofPages = []
+    //     for (let i = 1; i < pages; i++) {
+    //         numberofPages.push(i)
+    //     }
+    //     console.log(numberofPages);
 
-    }
-    // const filterlist = (subcat) =>{
-    //     const updatedList = Category.map((curElem)=>curElem.subcategories.filter((subcateg)=>{
-    //         return subcateg.name===subcat.name 
+    // }
+    // const getSubcat = (subcat) => {
+    //     const updatedList = Category.map((curElem) => curElem.subcategories.filter((subcateg) => {
+    //         return subcateg.name === subcat
 
     //     }))
-    //     // setUpdatedsubcat(updatedList);
+    //     console.log(updatedList);
+    //     setUpdatedsubcat(updatedList);
     //     // return updatedList
 
     // }
-
-    // const currentPosts = Category.slice(indexOfLastPost,indexOfFirstPost)
-    // console.log(currentPosts);
-
     return (
         <>
             {loading?(
-                Category.filter(cards => cards.id === parseInt(catid)).map((curElem, ind) => {
+
+                Category.filter(cat => cat.id === parseInt(catid)).map((curElem, ind) => {
+
 
                     return (
                         <>
                             <Breadcrumb categoryname={curElem.name} />
-
-
                             <section className="utf_block_wrapper">
                                 <div className="container">
                                     <div className="row">
@@ -73,41 +73,88 @@ const Category = () => {
                                                     {
                                                         curElem.subcategories.map((subcategories) => {
                                                             return (
-                                                                <li key={subcategories.id} ><a style={{ "cursor": "pointer" }} >{subcategories.name}</a></li>
+                                                                <li key={subcategories.id} ><a style={{ "cursor": "pointer" }}  >{subcategories.name}</a></li>
                                                             )
 
                                                         })
-                                                        
-                                                        
-                                                        }
+
+
+                                                    }
 
                                                 </ul>
+
+
                                                 {
 
-                                                    curElem.posts.map((post, ind) => {
+                                                    subname == "null" ?
 
-                                                        const postdate = post.updated_at;
-                                                        const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
+                                                        (
+                                                            curElem.posts.map((post, ind) => {
+
+                                                                const postdate = post.updated_at;
+                                                                const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
 
 
 
-                                                        return (
-                                                            <div className="utf_post_block_style utf_post_float_half clearfix">
-                                                                <div className="utf_post_thumb">
-                                                                    <Link strict to={`post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
-                                                                </div>
-                                                                <a className="utf_post_cat" href="/">{curElem.name}</a>
-                                                                <div className="utf_post_content">
-                                                                    <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
-                                                                    <div className="utf_post_meta">
-                                                                        <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
+                                                                return (
+                                                                    <div className="utf_post_block_style utf_post_float_half clearfix">
+                                                                        <div className="utf_post_thumb">
+                                                                            <Link strict to={`post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
+                                                                        </div>
+                                                                        <a className="utf_post_cat" href="/">{curElem.name}</a>
+                                                                        <div className="utf_post_content">
+                                                                            <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
+                                                                            <div className="utf_post_meta">
+                                                                                <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
+                                                                            </div>
+                                                                            <p>{post.details.substring(0, 100) + "..."}</p>
+                                                                        </div>
                                                                     </div>
-                                                                    <p>{post.details.substring(0, 100) + "..."}</p>
-                                                                </div>
-                                                            </div>
+                                                                )
+                                                            })
+
                                                         )
-                                                    })
-                                               
+
+                                                        :
+
+
+                                                        curElem.subcategories.map((sub) =>sub.posts.map((post,ind)=> {
+
+                                                            if (sub.name === subname) {
+                                                                 const postdate = post.updated_at;
+                                                                    const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
+                                                                    return (
+                                                                     
+                                                                   
+                                                                    // console.log(subpost.title);
+                                                                   
+
+                                                                     <div className="utf_post_block_style utf_post_float_half clearfix">
+                                                                        <div className="utf_post_thumb">
+                                                                            <Link strict to={`post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
+                                                                        </div>
+                                                                        <a className="utf_post_cat" href="/">{curElem.name}</a>
+                                                                        <div className="utf_post_content">
+                                                                            <h2 className="utf_post_title"><Link strict to={`/post/${post.id}`}>{post.title}</Link></h2>
+                                                                            <div className="utf_post_meta">
+                                                                                <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
+                                                                            </div>
+                                                                            <p>{post.details.substring(0, 100) + "..."}</p>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    )
+                                                               
+
+
+                                                            }
+
+
+                                                        }))
+
+
+
+
                                                 }
 
 
@@ -123,7 +170,7 @@ const Category = () => {
                                                     pageCount={curElem.posts.length / 4}
                                                     marginPagesDisplayed={2}
                                                     pageRangeDisplayed={6}
-                                                    onPageChange={handlepageclick}
+                                                    // onPageChange={handlepageclick}
                                                     containerClassName={'pagination'}
                                                     pageClassName={'pagination li'}
                                                     pageLinkClassName={'pagination li a'}
@@ -143,7 +190,7 @@ const Category = () => {
                                                                 <h3 key={ind} class="utf_block_title"><span>{curElem.name}</span></h3>
                                                             )
                                                         })
-                                                       
+
                                                     }
 
                                                     <div class="utf_list_post_block">
@@ -165,7 +212,7 @@ const Category = () => {
                                                                         </li>
                                                                     )
                                                                 }))
-                                                           
+
                                                             }
 
 
@@ -183,7 +230,7 @@ const Category = () => {
                                                                 <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
                                                             )
                                                         })
-                                                       
+
                                                     }
 
                                                     <OwlCarousel items={1} nav dots={false} className="owl-carousel owl-theme utf_post_slide" id="utf_post_slide">
@@ -209,7 +256,7 @@ const Category = () => {
                                                                     </div>
                                                                 )
                                                             }))
-                                                       
+
                                                         }
 
 
@@ -222,26 +269,22 @@ const Category = () => {
                                     </div>
                                 </div>
                             </section>
-
-                            )
-
-
-
                         </>
                     )
+
+
                 })
-                ) : (<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+
+
+
+                ):( <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
                 <rect width="400" height="300" fill="#fcfcfc"></rect>
-                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
+                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>   
             </svg></div>)
-
             }
-
-
-
 
         </>
     )
-}
 
+}
 export default Category

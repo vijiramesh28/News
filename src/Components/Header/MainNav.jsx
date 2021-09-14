@@ -6,7 +6,7 @@ const MainNav = () => {
 
     const [menus, setMenus] = useState([])
     const [activeIndex,setActiveIndex] = useState(0)
-
+    const [subActiveIndex, setSubActiveIndex] = useState(0)
     const GetMenusApi = async () => {
         const res = await instance.get('/categories')
         console.log(res.data.language.categories);
@@ -19,6 +19,7 @@ const MainNav = () => {
 
     const handleOnClick = index => {
         setActiveIndex(index); // remove the curly braces
+        setSubActiveIndex(index)
       };
     
     return (
@@ -39,19 +40,21 @@ const MainNav = () => {
                                                     className={activeIndex === -1 ? "active" : ""} ><Link to="/">Home</Link></li>
 
                                         {
+                                            
                                             menus.map((currElem, id) => {
+                                                var subtype =null 
 
                                                 if (currElem.subcategories.length !==0) {
                                                     return <li key={currElem.id} className="nav-item dropdown" onClick={() => handleOnClick(currElem.id)}
                                                     className={activeIndex === currElem.id ? "active" : ""} >
-                                                        <Link to={`/category/${currElem.id}`}  className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
+                                                        <Link to={`/category/${currElem.id}/${subtype}`}  className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
                                                         <ul className="utf_dropdown_menu" role="menu">
-                                                            {
-                                                                currElem.subcategories.map((sub,ind) => {
+                                                            {                         
+                                                                currElem.subcategories.map((sub) => {
                                                                     return(
                                                                         <li key={sub.id} className="nav-link" >
-                                                                        <Link to={`/category/${currElem.id}/${sub.id}`} onClick={() => handleOnClick(sub.id)}
-                                                                        className={activeIndex === sub.id ? "active" : ""} ><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
+                                                                        <Link to={`/category/${currElem.id}/${sub.name}`} onClick={() => handleOnClick(sub.name)}
+                                                                        className={subActiveIndex === sub.id ? "active" : ""} ><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
                                                                     </li>
                                                                     )
                                                                  
@@ -63,8 +66,9 @@ const MainNav = () => {
                                                     </li>
                                                     
                                                 }
+                                             
                                                  return <li className="nav-item" onClick={() => handleOnClick(currElem.id)}
-                                                 className={activeIndex === currElem.id ? "active" : ""}  ><Link to={`/category/${currElem.id}`}  >{currElem.name}</Link></li>
+                                                 className={activeIndex === currElem.id ? "active" : ""} ><Link to={`/category/${currElem.id}/${subtype}`} >{currElem.name}</Link></li>
                                             
                                             })
                                         }
