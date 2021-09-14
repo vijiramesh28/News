@@ -1,4 +1,5 @@
 import React, { useContext,useEffect } from 'react'
+import { NavLink } from 'react-router-dom'
 import { translate } from '../../Context/translate.context'
 
 // import translate from '../../Context/translate.context'
@@ -54,9 +55,9 @@ const Topbar = () => {
                     <div className="row">
                         <div className="col-md-8">
                             <ul className="unstyled top-nav">
-                                <li><a id="act1" style={{"cursor":"pointer"}}  onClick={()=>translateLang(langu.English.code)}  >English</a></li>
-                                <li><a id="act2"  style={{"cursor":"pointer"}}  onClick={()=>translateLang(langu.Marathi.code)}  >Marathi</a></li>
-                                <li><a id="act3" style={{"cursor":"pointer"}}   onClick={()=>translateLang(langu.Hindi.code)}  >Hindi</a></li>
+                                <li onClick={()=>translateLang(langu.English.code)} ><NavLink strict to="/" id="act1" style={{"cursor":"pointer"}}    >English</NavLink></li>
+                                <li  onClick={()=>translateLang(langu.Marathi.code)} ><NavLink strict to="/" id="act2"  style={{"cursor":"pointer"}}  >Marathi</NavLink></li>
+                                <li onClick={()=>translateLang(langu.Hindi.code)} ><NavLink strict to="/" id="act3" style={{"cursor":"pointer"}}     >Hindi</NavLink></li>
 
 
                             </ul>
