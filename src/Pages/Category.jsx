@@ -15,8 +15,8 @@ const Category = () => {
     const { catid } = useParams()
     const { subname } = useParams()
     const [Category, setCategory] = useState([])
-
     const [loading, setLoading] = useState(false)
+     const [aIndex,setAIndex] = useState(0)
     // const [updatedsubcat, setUpdatedsubcat] = useState([])
     // const [pageCount, setPageCount] = useState(0)
 
@@ -33,6 +33,9 @@ const Category = () => {
 
 
     }, [])
+    const handleClick = (index)=>{
+        setAIndex(index); 
+    }
 
     // const handlepageclick = (data) => {
     //     const pages = 4
@@ -73,7 +76,7 @@ const Category = () => {
                                                     {
                                                         curElem.subcategories.map((subcategories) => {
                                                             return (
-                                                                <li key={subcategories.id} ><Link strict to={`${subcategories.name}`} style={{ "cursor": "pointer" }}  >{subcategories.name}</Link></li>
+                                                                <li key={subcategories.id} ><Link strict to={`${subcategories.name}`} className={aIndex === subcategories.id ? "active" : ""} style={{ "cursor": "pointer" }} onClick={()=>handleClick(subcategories.id)} >{subcategories.name}</Link></li>
                                                             )
 
                                                         })
