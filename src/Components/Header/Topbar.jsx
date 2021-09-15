@@ -59,7 +59,6 @@ const Topbar = () => {
                                 <li  onClick={()=>translateLang(langu.Marathi.code)} ><NavLink strict to="/" id="act2"  style={{"cursor":"pointer"}}  >Marathi</NavLink></li>
                                 <li onClick={()=>translateLang(langu.Hindi.code)} ><NavLink strict to="/" id="act3" style={{"cursor":"pointer"}}     >Hindi</NavLink></li>
 
-
                             </ul>
                         </div>
                         <TopbarSocial />

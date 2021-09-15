@@ -47,13 +47,13 @@ const MainNav = () => {
                                                 if (currElem.subcategories.length !==0) {
                                                     return <li key={currElem.id} className="nav-item dropdown" onClick={() => handleOnClick(currElem.id)}
                                                     className={activeIndex === currElem.id ? "active" : ""} >
-                                                        <Link to={`/category/${currElem.id}/${subtype}`}  className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
+                                                        <Link strict to={`/category/${currElem.id}/${subtype}`}  className="nav-link" >{currElem.name}<i className="fa fa-angle-down" ></i></Link>
                                                         <ul className="utf_dropdown_menu" role="menu">
                                                             {                         
                                                                 currElem.subcategories.map((sub) => {
                                                                     return(
                                                                         <li key={sub.id} className="nav-link" >
-                                                                        <Link to={`/category/${currElem.id}/${sub.name}`} onClick={() => handleOnClick(sub.name)}
+                                                                        <Link strict to={`/category/${currElem.id}/${sub.name}`} onClick={() => handleOnClick(sub.name)}
                                                                         className={subActiveIndex === sub.id ? "active" : ""} ><i className="fa fa-angle-double-right"></i>{sub.name}</Link>
                                                                     </li>
                                                                     )
@@ -68,7 +68,7 @@ const MainNav = () => {
                                                 }
                                              
                                                  return <li className="nav-item" onClick={() => handleOnClick(currElem.id)}
-                                                 className={activeIndex === currElem.id ? "active" : ""} ><Link to={`/category/${currElem.id}/${subtype}`} >{currElem.name}</Link></li>
+                                                 className={activeIndex === currElem.id ? "active" : ""} ><Link strict to={`/category/${currElem.id}/${subtype}`} >{currElem.name}</Link></li>
                                             
                                             })
                                         }

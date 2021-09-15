@@ -73,7 +73,7 @@ const Category = () => {
                                                     {
                                                         curElem.subcategories.map((subcategories) => {
                                                             return (
-                                                                <li key={subcategories.id} ><a style={{ "cursor": "pointer" }}  >{subcategories.name}</a></li>
+                                                                <li key={subcategories.id} ><Link strict to={`${subcategories.name}`} style={{ "cursor": "pointer" }}  >{subcategories.name}</Link></li>
                                                             )
 
                                                         })
