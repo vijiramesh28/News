@@ -16,9 +16,10 @@ const Category = () => {
     const { subname } = useParams()
     const [Category, setCategory] = useState([])
     const [loading, setLoading] = useState(false)
-     const [aIndex,setAIndex] = useState(0)
-    // const [updatedsubcat, setUpdatedsubcat] = useState([])
-    // const [pageCount, setPageCount] = useState(0)
+    const [aIndex,setAIndex] = useState(0)
+    const [pageNumber, setPageNumber] = useState(0)
+   const UsersPerPage = 4
+   const PagesVisited = pageNumber * UsersPerPage
 
 
     const GetPostData = async () => {
@@ -37,31 +38,19 @@ const Category = () => {
         setAIndex(index); 
     }
 
-    // const handlepageclick = (data) => {
-    //     const pages = 4
-    //     const numberofPages = []
-    //     for (let i = 1; i < pages; i++) {
-    //         numberofPages.push(i)
-    //     }
-    //     console.log(numberofPages);
+   const changePage =({selected})=>{
+    setPageNumber(selected)
+   }
 
-    // }
-    // const getSubcat = (subcat) => {
-    //     const updatedList = Category.map((curElem) => curElem.subcategories.filter((subcateg) => {
-    //         return subcateg.name === subcat
-
-    //     }))
-    //     console.log(updatedList);
-    //     setUpdatedsubcat(updatedList);
-    //     // return updatedList
-
-    // }
+   
+   
     return (
         <>
             {loading?(
 
                 Category.filter(cat => cat.id === parseInt(catid)).map((curElem, ind) => {
-
+                    const PageCount = Math.ceil(curElem.posts.length/UsersPerPage)
+                    console.log(PageCount);
 
                     return (
                         <>
@@ -92,7 +81,7 @@ const Category = () => {
                                                     subname == "null" ?
 
                                                         (
-                                                            curElem.posts.map((post, ind) => {
+                                                            curElem.posts.slice(PagesVisited, PagesVisited+UsersPerPage).map((post, ind) => {
 
                                                                 const postdate = post.updated_at;
                                                                 const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
@@ -121,7 +110,7 @@ const Category = () => {
                                                         :
 
 
-                                                        curElem.subcategories.map((sub) =>sub.posts.map((post,ind)=> {
+                                                        curElem.subcategories.map((sub) =>sub.posts.slice(PagesVisited, PagesVisited+UsersPerPage).map((post,ind)=> {
 
                                                             if (sub.name === subname) {
                                                                  const postdate = post.updated_at;
@@ -170,10 +159,10 @@ const Category = () => {
                                                     previousLabel={'<'}
                                                     nextLabel={'>'}
                                                     breakLabel={'...'}
-                                                    pageCount={curElem.posts.length / 4}
+                                                    pageCount={PageCount}
+                                                    onPageChange={changePage}
                                                     marginPagesDisplayed={2}
                                                     pageRangeDisplayed={6}
-                                                    // onPageChange={handlepageclick}
                                                     containerClassName={'pagination'}
                                                     pageClassName={'pagination li'}
                                                     pageLinkClassName={'pagination li a'}
