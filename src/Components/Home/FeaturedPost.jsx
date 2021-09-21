@@ -11,13 +11,14 @@ const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
     const [loading, setLoading] = useState(false)
     const [sidepost, setSidepost] = useState([])
+   
 
     const GetPostData = async () => {
-        const re = await axios.get('https://wcprojects.in/api/english')
+        const re = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
         const res = await axios.get('https://dn.wcprojects.in/api/1/slider')
         console.log(res.data.slider)
         setLatestNews(res.data.slider)
-        setSidepost(re.data.language.categories)
+        setSidepost(re.data.posts)
         setLoading(true)
     }
     useEffect(() => {
@@ -80,20 +81,20 @@ const FeaturedPost = () => {
                             <div className="row">
 
                                 {
-                                    sidepost.slice(0, 2).map((curElem, ind) => curElem.posts.slice(0, 1).map((posts, ind) => {
+                                    sidepost.slice(0, 2).map((curElem, ind) => {
 
-                                        const postdate = posts.updated_at
+                                        const postdate = curElem.updated_at
                                         const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
 
                                         return (
                                             <div className="col-md-12">
                                                 <div className="utf_post_overaly_style text-center first clearfix">
                                                     <div className="utf_post_thumb">
-                                                        <Link to={`/post/${posts.id}`}><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${posts.img_1}`} alt="" /></Link>
+                                                        <Link to={`/post/${curElem.id}`}><img className="img-fluid" src={`https://dn.wcprojects.in/${curElem.img_4}`} alt="" /></Link>
                                                     </div>
                                                     <div className="utf_post_content">
-                                                        <Link to={`/post/${posts.id}`} className="utf_post_cat" >{curElem.name}</Link>
-                                                        <h2 className="utf_post_title clamped title-medium"><a href="post.html">{posts.title}</a></h2>
+                                                        <Link to={`/post/${curElem.id}`} className="utf_post_cat" >{curElem.category.name}</Link>
+                                                        <h2 className="utf_post_title clamped title-medium"><a href="post.html">{curElem.title}</a></h2>
                                                         <div className="utf_post_meta">
                                                             <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
                                                         </div>
@@ -102,7 +103,7 @@ const FeaturedPost = () => {
                                             </div>
                                         )
 
-                                    }))
+                                    })
                                 }
 
                             </div>
