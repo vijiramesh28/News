@@ -1,20 +1,30 @@
 
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
-import instance from "../../Api/axios"
 const MainNav = () => {
 
     const [menus, setMenus] = useState([])
     const [activeIndex,setActiveIndex] = useState(0)
     const [subActiveIndex, setSubActiveIndex] = useState(0)
-    const GetMenusApi = async () => {
-        const res = await instance.get('/categories')
-        console.log(res.data.language.categories);
-        setMenus(res.data.language.categories)
+    const GetMenusApi = async (t) => {
+        if(t!=null)
+        {
+        const res = await axios.get(`https://dn.wcprojects.in/api/${t}/categories`)
+        console.log(res.data.categories);
+        setMenus(res.data.categories)
+        }
+        else{
+        const res = await axios.get(`https://dn.wcprojects.in/api/english/categories`)
+        console.log(res.data.categories);
+        setMenus(res.data.categories)
+        }
+        
     }
 
     useEffect(() => {
-        GetMenusApi()
+        const langData = localStorage.getItem("language")
+        GetMenusApi(langData)
     }, [])
 
     const handleOnClick = index => {

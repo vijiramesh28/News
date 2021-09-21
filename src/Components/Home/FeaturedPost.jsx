@@ -33,9 +33,8 @@ const FeaturedPost = () => {
     useEffect(() => {
         const langData = localStorage.getItem("lang")
         GetPostData(langData)
-
-
     }, [])
+    
     return (
         <>
 

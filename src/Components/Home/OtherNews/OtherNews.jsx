@@ -7,22 +7,39 @@ import PostRelatedNews from './PostRelatedNews'
 
 const OtherNews = () => {
     const [OtherNews, setOtherNews] = useState([])
+    const [OtherNewsCat, setOtherNewsCat] = useState([])
     const [JobNews, setJobNews] = useState([])
     const [JobCategory, setJobCategory] = useState([])
     const [loading, setLoading] =useState(false)
 
-    const GetPostData = async () => {
-        const res = await axios.get('https://wcprojects.in/api/english')
-        const re = await axios.get('https://dn.wcprojects.in/api/1/job/jobs')
-        console.log(re)
-        setOtherNews(res.data.language.categories)
-        setJobNews(re.data.posts)
-        setJobCategory(re.data.category)
-        setLoading(true)
+    const GetPostData = async (l,t) => {
+        if(l!=null && t!=null)
+        {
+            const res = await axios.get(`https://dn.wcprojects.in/api/${t}/category/1`)
+            const re = await axios.get(`https://dn.wcprojects.in/api/${l}/job/jobs`)
+            console.log(re)
+            setOtherNews(res.data.posts.data)
+            setOtherNewsCat(res.data.category)
+            setJobNews(re.data.posts)
+            setJobCategory(re.data.category)
+            setLoading(true)
+        }
+        else{
+            const res = await axios.get('https://dn.wcprojects.in/api/english/category/1')
+            const re = await axios.get('https://dn.wcprojects.in/api/1/job/jobs')
+            console.log(re)
+            setOtherNews(res.data.language.categories)
+            setJobNews(re.data.posts)
+            setJobCategory(re.data.category)
+            setLoading(true)
+        }
+       
 
     }
     useEffect(() => {
-        GetPostData()
+        const localData = localStorage.getItem("lang")
+        const localData2 = localStorage.getItem("language")
+        GetPostData(localData,localData2)
 
 
     }, [])
@@ -35,12 +52,9 @@ const OtherNews = () => {
                         <div className="col-lg-8 col-md-12">
                             <div className="utf_more_news block color-default">
                                 {
-                                    OtherNews.slice(0, 1).map((curElem, ind) => {
-
-                                        return (
-                                            <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
-                                        )
-                                    })
+                                    
+                                            <h3 className="utf_block_title"><span>{OtherNewsCat.name}</span></h3>
+                                     
                                 }
 
                                 {loading?(
@@ -48,15 +62,15 @@ const OtherNews = () => {
                                         <OwlCarousel className="owl-carousel owl-theme utf_more_news_slide" items={1}  responsiveRefreshRate={200} lazyLoad dots={true}  id="utf_more_news_slide">
 
                                             {
-                                                OtherNews.slice(0,1).map((curElem, ind) => curElem.posts.map((post, ind) => {
+                                                OtherNews.map((post, ind) => {
                                                     const postdate = post.updated_at;
                                                     const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
                                                     return (
-                                                        <div key={curElem.id} className="item">
-                                                            <OtherNewsComp key={post.id} postImg={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} categoryTitle={curElem.name} postTitle={post.title} postDate={postmoddate} postDetails={post.details.substring(0, 200) + "..."} />
+                                                        <div key={OtherNewsCat.id} className="item">
+                                                            <OtherNewsComp key={post.id} postImg={`https://dn.wcprojects.in/${post.img_4}`} categoryTitle={OtherNewsCat.name} postTitle={post.title} postDate={postmoddate} postDetails={post.details.substring(1,200)+"..."}/>
                                                         </div>
                                                     )
-                                                }))
+                                                })
                                             }
 
 

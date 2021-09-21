@@ -19,7 +19,23 @@ const NewsTabs = () => {
     const [loading, setLoading] = useState(false)
 
 
-    const GetPostData = async () => {
+    const GetPostData = async (l) => {
+        if(l!=null)
+        {
+        const res = await axios.get('https://wcprojects.in/api/english')
+        const re = await axios.get(`https://dn.wcprojects.in/api/${l}/health/health`)
+        const ed = await axios.get(`https://dn.wcprojects.in/api/${l}/editorpick`)
+        const en = await axios.get(`https://dn.wcprojects.in/api/${l}/entertainment/entertainment`)
+        console.log(res.data.language.categories);
+        setSingleposts(res.data.language.categories)
+        setPoliticalNews(re.data.posts)
+        setEditorPicks(ed.data.posts)
+        setPoliticalCategory(re.data.category)
+        setEntertNews(en.data.posts)
+        setEnterNewsCat(en.data.category)
+        setLoading(true)
+        }
+        else{
         const res = await axios.get('https://wcprojects.in/api/english')
         const re = await axios.get('https://dn.wcprojects.in/api/1/health/health')
         const ed = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
@@ -32,9 +48,12 @@ const NewsTabs = () => {
         setEntertNews(en.data.posts)
         setEnterNewsCat(en.data.category)
         setLoading(true)
+        }
+        
     }
     useEffect(() => {
-        GetPostData()
+        const langData = localStorage.getItem("lang")
+        GetPostData(langData)
 
 
     }, [])

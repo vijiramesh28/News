@@ -7,13 +7,23 @@ import NewsVideoComp from "./NewsVideoComp"
 const NewsVideo = () => {
     const [Videolist, setVideolist] = useState([])
 
-    const GetPostData = async () => {
-        const res = await axios.get('https://dn.wcprojects.in/api/1/videos')
-        console.log(res.data.posts);
-        setVideolist(res.data.posts)
+    const GetPostData = async (l) => {
+        if(l!=null)
+        {
+            const res = await axios.get(`https://dn.wcprojects.in/api/${l}/videos`)
+            console.log(res.data.posts);
+            setVideolist(res.data.posts)
+        }
+        else{
+            const res = await axios.get('https://dn.wcprojects.in/api/1/videos')
+            console.log(res.data.posts);
+            setVideolist(res.data.posts)
+        }
+    
     }
     useEffect(() => {
-        GetPostData()
+        const langData = localStorage.getItem("lang")
+        GetPostData(langData)
 
 
     }, [])

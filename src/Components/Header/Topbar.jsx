@@ -19,7 +19,7 @@ const translateLang= (t,l)=>{
 const getActiveHightlight = () =>{
     const t = localStorage.getItem("language")
     const l = localStorage.getItem("lang")
-    if( t=='eng'&& l=='1')
+    if( t=='english'&& l=='1')
     {
         
         document.getElementById('act1').classList.add('active')

@@ -1,7 +1,7 @@
 import React, { createContext } from 'react'
 export const lang = {
     English: {
-        code: "eng",
+        code: "english",
         id:'1'
     },
     Marathi: {
