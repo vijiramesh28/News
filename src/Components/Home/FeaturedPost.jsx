@@ -4,33 +4,40 @@ import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import OwlCarousel from 'react-owl-carousel'
 
-
-
-
 const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
     const [loading, setLoading] = useState(false)
     const [sidepost, setSidepost] = useState([])
    
 
-    const GetPostData = async () => {
-        const re = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
-        const res = await axios.get('https://dn.wcprojects.in/api/1/slider')
-        console.log(res.data.slider)
-        setLatestNews(res.data.slider)
-        setSidepost(re.data.posts)
-        setLoading(true)
+    const GetPostData = async (l) => {
+        if(l!=null)
+        {
+            const re = await axios.get(`https://dn.wcprojects.in/api/${l}/editorpick`)
+            const res = await axios.get(`https://dn.wcprojects.in/api/${l}/slider`)
+            console.log(res.data.slider)
+            setLatestNews(res.data.slider)
+            setSidepost(re.data.posts)
+            setLoading(true)
+        }
+        else{
+            const re = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
+            const res = await axios.get('https://dn.wcprojects.in/api/1/slider')
+            console.log(res.data.slider)
+            setLatestNews(res.data.slider)
+            setSidepost(re.data.posts)
+            setLoading(true)
+        }
+       
     }
     useEffect(() => {
-        GetPostData()
+        const langData = localStorage.getItem("lang")
+        GetPostData(langData)
 
 
     }, [])
     return (
         <>
-
-
-
 
             <section className="utf_featured_post_area pt-4">
                 <div className="container">

@@ -6,10 +6,11 @@ import { translate } from '../../Context/translate.context'
 // import { NavLink } from "react-router-dom"
 import TopbarSocial from "./TopbarSocial"
 
-const translateLang= (t)=>{
+const translateLang= (t,l)=>{
 
     localStorage.setItem("language","eng")
     localStorage.setItem("language",t)
+    localStorage.setItem("lang",l)
     
   window.location.reload()
 
@@ -17,7 +18,8 @@ const translateLang= (t)=>{
 
 const getActiveHightlight = () =>{
     const t = localStorage.getItem("language")
-    if( t=='eng')
+    const l = localStorage.getItem("lang")
+    if( t=='eng'&& l=='1')
     {
         
         document.getElementById('act1').classList.add('active')
@@ -26,7 +28,7 @@ const getActiveHightlight = () =>{
         
 
     }
-    else if( t=='marathi')
+    else if( t=='marathi' && l=='2')
     {
         document.getElementById('act2').classList.add('active')
         document.getElementById('act1').classList.remove('active')
@@ -55,9 +57,9 @@ const Topbar = () => {
                     <div className="row">
                         <div className="col-md-8">
                             <ul className="unstyled top-nav">
-                                <li onClick={()=>translateLang(langu.English.code)} ><NavLink strict to="/" id="act1" style={{"cursor":"pointer"}}    >English</NavLink></li>
-                                <li  onClick={()=>translateLang(langu.Marathi.code)} ><NavLink strict to="/" id="act2"  style={{"cursor":"pointer"}}  >Marathi</NavLink></li>
-                                <li onClick={()=>translateLang(langu.Hindi.code)} ><NavLink strict to="/" id="act3" style={{"cursor":"pointer"}}     >Hindi</NavLink></li>
+                                <li onClick={()=>translateLang(langu.English.code,langu.English.id)} ><NavLink strict to="/" id="act1" style={{"cursor":"pointer"}}    >English</NavLink></li>
+                                <li  onClick={()=>translateLang(langu.Marathi.code,langu.Marathi.id)} ><NavLink strict to="/" id="act2"  style={{"cursor":"pointer"}}  >Marathi</NavLink></li>
+                                <li onClick={()=>translateLang(langu.Hindi.code,langu.Hindi.id)} ><NavLink strict to="/" id="act3" style={{"cursor":"pointer"}}     >Hindi</NavLink></li>
 
                             </ul>
                         </div>

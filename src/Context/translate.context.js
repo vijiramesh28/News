@@ -1,14 +1,17 @@
-import React,{createContext} from 'react'
+import React, { createContext } from 'react'
 export const lang = {
-    English:{
-        code: "eng"
+    English: {
+        code: "eng",
+        id:'1'
     },
-    Marathi:{
-        
-       code:'marathi'
+    Marathi: {
+
+        code: 'marathi',
+        id:'2'
     },
-    Hindi:{
-        code:'hindi'
+    Hindi: {
+        code: 'hindi',
+        id:'3'
     }
 
 }
