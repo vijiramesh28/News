@@ -7,21 +7,30 @@ import TabMainNews from "./TabMainNews"
 import Tabs from "./Tabs"
 import SingleSlider from "./SingleSlider"
 import { Link } from 'react-router-dom'
-
-
-
+import HealthNews from './HealthNews'
 
 const NewsTabs = () => {
     const [Singleposts, setSingleposts] = useState([])
-    const[loading, setLoading]=useState(false)
-    // const [submenuList,setSubmenulist] =useState(uniqueSubcategory)
-
+    const [editorPicks, setEditorPicks] = useState([])
+    const [politicalNews, setPoliticalNews] = useState([])
+    const [poiticalCategory, setPoliticalCategory] = useState([])
+    const [EntertNews, setEntertNews] = useState([])
+    const [EnterNewsCat, setEnterNewsCat] = useState([])
+    const [loading, setLoading] = useState(false)
 
 
     const GetPostData = async () => {
         const res = await axios.get('https://wcprojects.in/api/english')
+        const re = await axios.get('https://dn.wcprojects.in/api/1/health/health')
+        const ed = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
+        const en = await axios.get('https://dn.wcprojects.in/api/1/entertainment/entertainment')
         console.log(res.data.language.categories);
         setSingleposts(res.data.language.categories)
+        setPoliticalNews(re.data.posts)
+        setEditorPicks(ed.data.posts)
+        setPoliticalCategory(re.data.category)
+        setEntertNews(en.data.posts)
+        setEnterNewsCat(en.data.category)
         setLoading(true)
     }
     useEffect(() => {
@@ -30,21 +39,7 @@ const NewsTabs = () => {
 
     }, [])
 
-    //     const uniqueSubcategory = [...new Set(Singleposts.map((category,ind)=>{
-    //         return category.name
-    //         // return category.name;
-    //     })
 
-    //     )
-
-    // ]
-
-    // const FilterPosts=(latestnews)=>{
-    //     const updatedPosts = Singleposts.map((curElem,ind)=>{
-    //         return curElem.name ===latestnews
-    //     })
-    //     setSingleposts(updatedPosts)
-    // }
 
     return (
         <>
@@ -55,44 +50,44 @@ const NewsTabs = () => {
                         <div className="col-lg-8 col-md-12">
 
                             {
-                                loading?(
-                            
-                                Singleposts.slice(0, 2).map((curElem,ind) => {
-                                    return (
-                                        <div className="utf_featured_tab color-default">
+                                loading ? (
 
-                                            <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
+                                    Singleposts.slice(0, 2).map((curElem, ind) => {
+                                        return (
+                                            <div className="utf_featured_tab color-default">
 
-                                            <ul className="nav nav-tabs">
-                                                <Tabs submenuList={Singleposts} />
+                                                <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
 
-                                            </ul>
-                                            <div className="tab-content">
-                                                <div className="tab-pane active animated fadeInRight" id="tab_a">
-                                                    <div className="row">
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <TabMainNews postData={Singleposts} />
-                                                        </div>
+                                                <ul className="nav nav-tabs">
+                                                    <Tabs submenuList={Singleposts} />
 
-                                                        <div className="col-lg-6 col-md-6">
-                                                            <div className="utf_list_post_block">
-                                                                <ul className="utf_list_post">
-                                                                    <TabLists postData={Singleposts} />
-                                                                </ul>
+                                                </ul>
+                                                <div className="tab-content">
+                                                    <div className="tab-pane active animated fadeInRight" id="tab_a">
+                                                        <div className="row">
+                                                            <div className="col-lg-6 col-md-6">
+                                                                <TabMainNews postData={Singleposts} />
+                                                            </div>
+
+                                                            <div className="col-lg-6 col-md-6">
+                                                                <div className="utf_list_post_block">
+                                                                    <ul className="utf_list_post">
+                                                                        <TabLists postData={Singleposts} />
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
+
+
                                                 </div>
-
-
                                             </div>
-                                        </div>
-                                    )
-                                })
-                                ):( <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-                                <rect width="400" height="300" fill="#fcfcfc"></rect>
-                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>   
-                            </svg></div>)
+                                        )
+                                    })
+                                ) : (<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                                    <rect width="400" height="300" fill="#fcfcfc"></rect>
+                                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
+                                </svg></div>)
                             }
 
                             <div className="gap-30"></div>
@@ -104,33 +99,30 @@ const NewsTabs = () => {
                                 <div className="widget color-default">
 
                                     {
-                                    
-                                        Singleposts.slice(0, 1).map((curElem, ind) => {
-                                            return (
-                                                <h3 key={ind} className="utf_block_title"><span>{curElem.name}</span></h3>
-                                            )
-                                        })
-                                        }
 
-                                    {loading?(
-                                        Singleposts.length && (
+                                        <h3  className="utf_block_title"><span>{EnterNewsCat.name}</span></h3>
+
+                                    }
+
+                                    {loading ? (
+                                        EntertNews.length && (
                                             <OwlCarousel items={1} responsiveRefreshRate={200} lazyLoad loop={true} autoplay={true} dots={false} nav className="owl-carousel owl-theme utf_post_slide" id="utf_post_slide" >
                                                 {
-                                                    Singleposts.slice(0, 1).map((postElem, ind) => postElem.posts.slice(0, 4).map((post, ind) => {
-                                                        const PostDate = post.updated_at;
+                                                    EntertNews.map((postElem, ind) => {
+                                                        const PostDate = postElem.updated_at;
                                                         const Postmoddate = dateFormat(PostDate, "dd mmmm , yyyy");
                                                         return (
-                                                            <SingleSlider postImg={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} Categorytitle={postElem.name} postTile={post.title} postDate={Postmoddate} />
+                                                            <SingleSlider postImg={`https://dn.wcprojects.in/${postElem.img_4}`} Categorytitle={EnterNewsCat.name} postTile={postElem.title} postDate={Postmoddate} />
                                                         )
-                                                    }))
+                                                    })
                                                 }
 
 
                                             </OwlCarousel>
                                         )
-                                        ):( <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                                    ) : (<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
                                         <rect width="400" height="300" fill="#fcfcfc"></rect>
-                                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>   
+                                        <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
                                     </svg></div>)
                                     }
 
@@ -138,20 +130,20 @@ const NewsTabs = () => {
 
                                 <div className="widget color-default">
                                     {
-                                        Singleposts.slice(1, 2).map((curElem, ind) => curElem.posts.slice(0, 1).map((post, ind) => {
-                                            const postdate = post.updated_at
+                                        politicalNews.slice(1, 2).map((curElem, ind) => {
+                                            const postdate = curElem.updated_at
                                             const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
                                             return (
                                                 <>
-                                                    <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
+                                                    <h3 className="utf_block_title"><span>{poiticalCategory.name}</span></h3>
 
                                                     <div className="utf_post_overaly_style clearfix">
                                                         <div className="utf_post_thumb">
-                                                            <Link to={curElem.id}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link>
+                                                            <Link to={curElem.id}> <img className="img-fluid" src={`https://dn.wcprojects.in/${curElem.img_3}`} alt="" /> </Link>
                                                         </div>
                                                         <div className="utf_post_content">
-                                                            <Link className="utf_post_cat" to={`post/${curElem.id}`}>{curElem.name}</Link>
-                                                            <h2 className="utf_post_title"><Link to={`post/${curElem.id}`}>{post.title}</Link></h2>
+                                                            <Link className="utf_post_cat" to={`post/${curElem.id}`}>{poiticalCategory.name}</Link>
+                                                            <h2 className="utf_post_title"><Link to={`post/${curElem.id}`}>{curElem.title}</Link></h2>
                                                             <div className="utf_post_meta">
                                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
                                                             </div>
@@ -159,32 +151,20 @@ const NewsTabs = () => {
                                                     </div>
                                                 </>
                                             )
-                                        }))
+                                        })
                                     }
 
                                     <div className="utf_list_post_block">
                                         <ul className="utf_list_post">
 
                                             {
-                                                Singleposts.slice(2, 7).map((curElem, ind) => curElem.posts.slice(0, 1).map((post, ind) => {
-                                                    const postdate = post.updated_at
+                                                editorPicks.slice(0, 3).map((curElem, ind) => {
+                                                    const postdate = curElem.updated_at
                                                     const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
                                                     return (
-                                                        <li className="clearfix">
-                                                            <div className="utf_post_block_style post-float clearfix">
-                                                                <div className="utf_post_thumb">
-                                                                    <Link to={`/post/${post.id}`}> <img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} alt="" /> </Link> <Link className="utf_post_cat" to={`post/${post.id}`}>{curElem.name}</Link>
-                                                                </div>
-                                                                <div className="utf_post_content">
-                                                                    <h2 className="utf_post_title clamped title-small"><a href="post.html">{post.title}</a></h2>
-                                                                    <div className="utf_post_meta">
-                                                                        <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                        <HealthNews postid={curElem.id} posttitle={curElem.title} postImg={`https://dn.wcprojects.in/${curElem.img_4}`} categoryname={curElem.category.name} postdate={postmoddate} />
                                                     )
-                                                }))
+                                                })
                                             }
 
 

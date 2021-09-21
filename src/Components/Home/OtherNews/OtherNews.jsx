@@ -7,12 +7,17 @@ import PostRelatedNews from './PostRelatedNews'
 
 const OtherNews = () => {
     const [OtherNews, setOtherNews] = useState([])
-    const[loading, setLoading] =useState(false)
+    const [JobNews, setJobNews] = useState([])
+    const [JobCategory, setJobCategory] = useState([])
+    const [loading, setLoading] =useState(false)
 
     const GetPostData = async () => {
         const res = await axios.get('https://wcprojects.in/api/english')
-        console.log(res.data.language.categories)
+        const re = await axios.get('https://dn.wcprojects.in/api/1/job/jobs')
+        console.log(re)
         setOtherNews(res.data.language.categories)
+        setJobNews(re.data.posts)
+        setJobCategory(re.data.category)
         setLoading(true)
 
     }
@@ -71,11 +76,9 @@ const OtherNews = () => {
                             <div className="sidebar utf_sidebar_right">
                                 <div className="widget color-default">
                                     {
-                                        OtherNews.slice(1,2).map((curElem,ind)=>{
-                                            return (
-                                                <h3 key={ind} className="utf_block_title"><span>{curElem.name}</span></h3>
-                                            )
-                                        })
+                                        
+                                                <h3 className="utf_block_title"><span>{JobCategory.name}</span></h3>
+                                        
                                         
                                     }
                                 
@@ -83,13 +86,13 @@ const OtherNews = () => {
                                     <div className="utf_list_post_block">
                                         <ul className="utf_list_post review-post-list">
                                             {
-                                                OtherNews.slice(2,3).map((curElem,ind)=>curElem.posts.slice(1,5).map((post,ind)=>{
-                                                    const postdate = post.updated_at;
+                                                JobNews.map((curElem,ind)=>{
+                                                    const postdate = curElem.updated_at;
                                                     const postmoddate = dateFormat(postdate, "dd mmmm , yyyy");
                                                     return(
-                                                        <PostRelatedNews key={post.id}  postImg={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} categoryTitle={curElem.name} postTitle={post.title} postDate={postmoddate} postDetails={post.details.substring(0, 200) + "..."}  />
+                                                        <PostRelatedNews key={curElem.id}  postImg={`https://dn.wcprojects.in/${curElem.img_3}`} categoryTitle={curElem.name} postTitle={curElem.title} postDate={postmoddate}  />
                                                     )
-                                                }))
+                                                })
                                                  
                                             }
                                          
