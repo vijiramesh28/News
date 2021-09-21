@@ -36,10 +36,16 @@ const getActiveHightlight = () =>{
 
 
     }
-    else{
+    else if(t=='hindi' && l=='3')
+    {
         document.getElementById('act3').classList.add('active')
         document.getElementById('act1').classList.remove('active')
         document.getElementById('act2').classList.remove('active')
+    }
+    else{
+        document.getElementById('act1').classList.add('active')
+        document.getElementById('act2').classList.remove('active')
+        document.getElementById('act3').classList.remove('active')
     }
 }
 
