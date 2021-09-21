@@ -13,10 +13,11 @@ const FeaturedPost = () => {
     const [sidepost, setSidepost] = useState([])
 
     const GetPostData = async () => {
-        const res = await axios.get('https://wcprojects.in/api/english')
-        console.log(res.data.language.categories)
-        setLatestNews(res.data.language.categories)
-        setSidepost(res.data.language.categories)
+        const re = await axios.get('https://wcprojects.in/api/english')
+        const res = await axios.get('https://dn.wcprojects.in/api/1/slider')
+        console.log(res.data.slider)
+        setLatestNews(res.data.slider)
+        setSidepost(re.data.language.categories)
         setLoading(true)
     }
     useEffect(() => {
@@ -40,16 +41,16 @@ const FeaturedPost = () => {
                                     <OwlCarousel items={1} responsiveRefreshRate={200} lazyLoad loop={true} autoplay={true} arrow={true} dots={false} className="owl-carousel owl-theme utf_featured_slider content-bottom" id="utf_featured_slider" >
 
                                         {
-                                            LatestNews.map((currElem, ind) => currElem.posts.map((post, ind) => {
-                                                const postdate = post.updated_at
+                                            LatestNews.map((currElem, ind) =>  {
+                                                const postdate = currElem.updated_at
                                                 const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
                                                 return (
 
-                                                    <div className="item" style={{ "backgroundImage": `url('https://wcprojects.in/public/media/posts/img1/${post.img_1}')` }}>
+                                                    <div className="item" style={{ "backgroundImage": `url('https://dn.wcprojects.in/${currElem.img_1}')` }}>
                                                         <div className="utf_featured_post">
                                                             <div className="utf_post_content">
-                                                                <Link to={`/post/${post.id}`} className="utf_post_cat" >{currElem.name}</Link>
-                                                                <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${post.id}`}>{post.title}</Link></h2>
+                                                                <Link to={`/post/${currElem.id}`} className="utf_post_cat" >{currElem.category.name}</Link>
+                                                                <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${currElem.id}`}>{currElem.title}</Link></h2>
                                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
                                                             </div>
                                                         </div>
@@ -58,7 +59,7 @@ const FeaturedPost = () => {
 
 
 
-                                            }))
+                                            })
 
                                         }
                                     </OwlCarousel>

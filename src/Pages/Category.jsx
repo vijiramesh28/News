@@ -22,7 +22,7 @@ const Category = () => {
    const PagesVisited = pageNumber * UsersPerPage
 
 
-    const GetPostData = async () => {
+    const GetPostData = async() => {
         const res = await axios.get('https://wcprojects.in/api/english')
         console.log(res.data.language.categories);
         setCategory(res.data.language.categories)
@@ -31,7 +31,6 @@ const Category = () => {
     }
     useEffect(() => {
         GetPostData()
-
 
     }, [])
     const handleClick = (index)=>{

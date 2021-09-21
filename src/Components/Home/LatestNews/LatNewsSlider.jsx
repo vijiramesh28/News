@@ -10,9 +10,9 @@ const LatNewsSlider = () => {
     const [loading,setLoading] = useState(false)
 
     const GetPostData = async () => {
-        const res = await axios.get('https://wcprojects.in/api/english')
-        console.log(res.data.language.categories);
-        setLatestNews(res.data.language.categories)
+        const res = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
+        console.log(res.data.posts);
+        setLatestNews(res.data.posts)
         setLoading(true)
     }
     useEffect(() => {
@@ -29,23 +29,23 @@ const LatNewsSlider = () => {
             <OwlCarousel className="owl-theme owl-carousel utf_latest_news_slide utf_post_slide cust_nav" items={4} responsiveRefreshRate={200} lazyLoad loop={true} arrow={true} dots={false} margin={10} nav  id="utf_latest_news_slide"  >
             {
                 
-                LatestNews.map((currElem,ind)=>currElem.posts.map((post,ind)=>{
+                LatestNews.map((currElem,ind)=>{
                     
-                   const postdate =  post.updated_at
+                   const postdate =  currElem.updated_at
                    const postmoddate = dateFormat(postdate,"dd mmmm , yyyy")
                 //    const postmoddate = new Date(postdate).toLocaleDateString()
                         return (
                             <>
-                        <div key={post.id} className="item" >
+                        <div key={currElem.id} className="item" >
                             <ul className="utf_list_post">
                                 <li className="clearfix">
                                     <div className="utf_post_block_style clearfix">
                                         <div className="utf_post_thumb">
-                                            <Link to={`post/${post.id}`}><img className="img-fluid" src={`https://wcprojects.in/public/media/posts/img1/${post.img_1}`} width="50px" alt="" /></Link>
+                                            <Link to={`post/${currElem.id}`}><img className="img-fluid" src={`https://dn.wcprojects.in/${currElem.img_4}`} width="50px" alt="" /></Link>
                                         </div>
-                                        <Link className="utf_post_cat" to={`post/${post.id}`}>{currElem.name}</Link>
+                                        <Link className="utf_post_cat" to={`post/${currElem.id}`}>{currElem.category.name}</Link>
                                         <div className="utf_post_content">
-                                            <h2 className="utf_post_title clamped title-medium"><a href="post.html">{post.title}</a></h2>
+                                            <h2 className="utf_post_title clamped title-medium"><a href="post.html">{currElem.title}</a></h2>
                                             <div className="utf_post_meta">
                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate} </span>
                                             </div>
@@ -59,7 +59,7 @@ const LatNewsSlider = () => {
                     })
                      
                
-                )
+                
             }
                             
     

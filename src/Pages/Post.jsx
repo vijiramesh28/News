@@ -8,6 +8,7 @@ import axios from "axios"
 import OwlCarousel from 'react-owl-carousel'
 import { Helmet } from 'react-helmet'
 
+
 const Post = () => {
     const { postid } = useParams()
     const [Category, setCategory] = useState([])
@@ -102,7 +103,9 @@ const Post = () => {
                                                     </div>
                                                 </div>
 
-                                                <nav className="post-navigation clearfix">
+                                              
+                                                
+                                                  <nav className="post-navigation clearfix">
                                                     <div className="post-previous">
                                                         <a href="/"> <span><i className="fa fa-angle-left"></i>Previous Post</span>
                                                             <h3>Zhang social media pop also known when smart innocent...</h3>

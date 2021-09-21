@@ -33,10 +33,12 @@ function App() {
 {/* //     <h2>{data}</h2>  */}
   <BrowserRouter>
 <div className="body-inner">
+  
     <Suspense fallback={<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
     <rect width="400" height="300" fill="#fcfcfc"></rect>
     <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>   
 </svg></div>}>
+
     <translate.Provider value={lang}>
     <Header />
     
@@ -51,6 +53,7 @@ function App() {
     
     <Footer />
     </translate.Provider>
+
     </Suspense>
 </div>
     </BrowserRouter>
