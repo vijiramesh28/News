@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import BaseUrl from '../../../Api/RestApi'
 import CategoryListComp from "./CategoryListComp"
+import { Container, Row } from "react-bootstrap"
 
 const CategoryList = () => {
     const [LatestNews, setLatestNews] = useState([])
@@ -54,13 +55,13 @@ const CategoryList = () => {
         <>
             {/* <!-- 2rd Block Wrapper Start --> */}
             <section className="utf_block_wrapper p-top-0 p-bottom-0">
-                <div className="container">
-                    <div className="row">
+                <Container>
+                    <Row>
                         <CategoryListComp LatestNews={LatestNews} Latestcat={Latestcat}  ></CategoryListComp>
                         <CategoryListComp LatestNews={PoliticalNews} Latestcat={Politicalcat}  ></CategoryListComp>
                         <CategoryListComp LatestNews={PuneNews} Latestcat={Punecat}  ></CategoryListComp>
-                    </div>
-                </div>
+                    </Row>
+                </Container>
             </section>
         </>
     )

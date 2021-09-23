@@ -1,39 +1,39 @@
 import instance from '../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import OwlCarousel from 'react-owl-carousel'
+import '../../Assets/slider.css'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import SidePost from './SidePost'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Carousel, Container, Row, Col } from 'react-bootstrap'
 
 const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
     const [loading, setLoading] = useState(false)
-    
-   
+
+
     const GetPostData = async (l) => {
-        if(l!=null)
-        {
+        if (l != null) {
             const re = await instance.get(`${l}/editorpick`)
             const res = await instance.get(`${l}/slider`)
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)
         }
-        else{
+        else {
             const re = await instance.get('1/editorpick')
             const res = await instance.get('1/slider')
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)
         }
-       
+
     }
     useEffect(() => {
         const langData = localStorage.getItem("lang")
         GetPostData(langData)
     }, [])
-    
+
     return (
         <>
 
@@ -44,23 +44,29 @@ const FeaturedPost = () => {
                             {loading ? (
 
                                 LatestNews.length && (
-                                    <OwlCarousel items={1} responsiveRefreshRate={200} lazyLoad loop={true} autoplay={true} arrow={true} dots={false} className="owl-carousel owl-theme utf_featured_slider content-bottom" id="utf_featured_slider" >
+                                    <Carousel indicators={false} interval={2000} className="header-carousel" >
 
                                         {
-                                            LatestNews.map((currElem, ind) =>  {
+                                            LatestNews.map((currElem, ind) => {
                                                 const postdate = currElem.updated_at
                                                 const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
                                                 return (
 
-                                                    <div className="item" style={{ "backgroundImage": `url('https://dn.wcprojects.in/${currElem.img_1}')` }}>
-                                                        <div className="utf_featured_post">
-                                                            <div className="utf_post_content">
-                                                                <Link to={`/post/${currElem.id}`} className="utf_post_cat" >{currElem.category.name}</Link>
-                                                                <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${currElem.id}`}>{currElem.title}</Link></h2>
+                                                    <Carousel.Item>
+                                                        <img
+                                                            className="d-block w-100 opacity-50"
+                                                            src={`https://dn.wcprojects.in/${currElem.img_1}`}
+                                                            alt="Latest News Slider"
+                                                            style={{"borderRadius":"5px", "height":"64vh"}}
+                                                        />
+
+                                                        <Carousel.Caption>
+                                                                <p><Link to={`/post/${currElem.id}`} className="post_cat" >{currElem.category.name}</Link></p>
+                                                                <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${currElem.id}`} className="text-white">{currElem.title}</Link></h2>
                                                                 <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                            
+                                                        </Carousel.Caption>
+                                                    </Carousel.Item>
                                                 )
 
 
@@ -68,7 +74,7 @@ const FeaturedPost = () => {
                                             })
 
                                         }
-                                    </OwlCarousel>
+                                    </Carousel>
                                 )
 
                             ) : (
@@ -82,7 +88,7 @@ const FeaturedPost = () => {
 
                         </Col>
 
-                                <SidePost />
+                        <SidePost />
                     </Row>
                 </Container>
             </section>

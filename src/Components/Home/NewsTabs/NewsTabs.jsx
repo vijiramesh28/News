@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import BaseUrl from '../../../Api/RestApi'
 import ENtertainmentSlider from './ENtertainmentSlider'
 import HealthNewsMain from './HealthNewsMain'
+import { Container, Col, Row } from 'react-bootstrap'
 // import Tabs from './TabLists'
 // import TabLists from './TabLists'
 // import TabMainNews from './TabMainNews'
@@ -54,9 +55,9 @@ const NewsTabs = () => {
         <>
             {/* <!-- 1rd Block Wrapper Start --> */}
             <section className="utf_block_wrapper p-bottom-0">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8 col-md-12">
+                <Container>
+                    <Row>
+                        <Col lg={8} md={12} >
 
                             {/* {
                                 loading ? (
@@ -101,17 +102,17 @@ const NewsTabs = () => {
 
                             <div className="gap-30"></div>
 
-                        </div>
+                        </Col>
 
-                        <div className="col-lg-4 col-md-12">
+                        <Col lg={4} md={12} >
                             <div className="sidebar utf_sidebar_right">
                                <ENtertainmentSlider />
 
                                 <HealthNewsMain healthNews={HealthNews} HealthNewsCat={HealthNewsCat} />
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </Col>
+                    </Row>
+                </Container>
             </section>
             {/* <!-- 1rd Block Wrapper End --> */}
         </>

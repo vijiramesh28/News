@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import { Link } from "react-router-dom"
 import dateFormat from 'dateformat'
+import { Col } from 'react-bootstrap'
+
 const CategoryListComp = ({LatestNews,Latestcat}) => {
     const [loading, setLoading] = useState(false)
     
@@ -22,7 +24,7 @@ const CategoryListComp = ({LatestNews,Latestcat}) => {
                                     const postdate = currElem.updated_at
                                     const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
                                     return (
-                                        <div key={ind} className="col-lg-4">
+                                        <Col lg={4} key={ind}>
                                             <div className="block color-default">
 
                                                 <h3 className="utf_block_title"><span>{Latestcat.name}</span></h3>
@@ -77,7 +79,7 @@ const CategoryListComp = ({LatestNews,Latestcat}) => {
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </Col>
                                     )
 
     

@@ -2,6 +2,7 @@ import BaseUrl from '../../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import dateFormat from 'dateformat'
 import NewsVideoComp from "./NewsVideoComp"
+import {Container, Row } from 'react-bootstrap'
 
 
 const NewsVideo = () => {
@@ -31,8 +32,8 @@ const NewsVideo = () => {
         <>
             {/* <!-- 2rd Block Wrapper Start --> */}
             <section className="utf_block_wrapper solid-bg">
-                <div className="container">
-                    <div className="row">
+                <Container>
+                    <Row>
 
                         {
                             Videolist.slice(0, 3).map((videodata, ind) => {
@@ -46,8 +47,8 @@ const NewsVideo = () => {
 
 
 
-                    </div>
-                </div>
+                    </Row>
+                </Container>
             </section>
             {/* <!-- 2rd Block Wrapper End --> */}
         </>

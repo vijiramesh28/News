@@ -4,6 +4,7 @@ import OwlCarousel from 'react-owl-carousel'
 import dateFormat from 'dateformat'
 import OtherNewsComp from './OtherNewsComp'
 import PostRelatedNews from './PostRelatedNews'
+import { Container, Col, Row } from 'react-bootstrap'
 
 const OtherNews = () => {
     const [OtherNews, setOtherNews] = useState([])
@@ -48,9 +49,9 @@ const OtherNews = () => {
         <>
             {/* <!-- 3rd Block Wrapper Start --> */}
             <section className="utf_block_wrapper p-bottom-0">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8 col-md-12">
+                <Container>
+                    <Row>
+                        <Col lg={8} md={12} >
                             <div className="utf_more_news block color-default">
                                 {
                                     
@@ -85,9 +86,9 @@ const OtherNews = () => {
                                 }
 
                             </div>
-                        </div>
+                        </Col>
 
-                        <div className="col-lg-4 col-sm-12">
+                        <Col lg={4} sm={12} >
                             <div className="sidebar utf_sidebar_right">
                                 <div className="widget color-default">
                                     {
@@ -97,7 +98,6 @@ const OtherNews = () => {
                                         
                                     }
                                 
-
                                     <div className="utf_list_post_block">
                                         <ul className="utf_list_post review-post-list">
                                             {
@@ -111,15 +111,13 @@ const OtherNews = () => {
                                                  
                                             }
                                          
-
-
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </Col>
+                    </Row>
+                </Container>
             </section>
             {/* <!-- 3rd Block Wrapper End --> */}
         </>
