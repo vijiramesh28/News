@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import axios from "axios"
+import BaseUrl from '../../../Api/RestApi'
 import CategoryListComp from "./CategoryListComp"
 
 const CategoryList = () => {
@@ -15,9 +15,9 @@ const CategoryList = () => {
 
     const getPostData = async (l) => {
         if (l != null) {
-        const lat = await axios.get(`https://dn.wcprojects.in/api/${l}/latest/latest-news`)
-        const pol = await axios.get(`https://dn.wcprojects.in/api/${l}/politics/politics`)
-        const pune = await axios.get(`https://dn.wcprojects.in/api/${l}/pune/pune`)
+        const lat = await BaseUrl.get(`${l}/latest/latest-news`)
+        const pol = await BaseUrl.get(`${l}/politics/politics`)
+        const pune = await BaseUrl.get(`${l}/pune/pune`)
         console.log(lat.data.posts);
         setLatestNews(lat.data.posts)
         setPoliticalNews(pol.data.posts)
@@ -28,9 +28,9 @@ const CategoryList = () => {
         setPunecat(pune.data.city)
         }
         else{
-            const lat = await axios.get('https://dn.wcprojects.in/api/1/latest/latest-news')
-            const pol = await axios.get('https://dn.wcprojects.in/api/1/politics/politics')
-            const pune = await axios.get('https://dn.wcprojects.in/api/1/pune/pune')
+            const lat = await BaseUrl.get('1/latest/latest-news')
+            const pol = await BaseUrl.get('1/politics/politics')
+            const pune = await BaseUrl.get('1/pune/pune')
             console.log(lat.data.posts);
             setLatestNews(lat.data.posts)
             setPoliticalNews(pol.data.posts)

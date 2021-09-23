@@ -1,4 +1,4 @@
-import axios from 'axios'
+import BaseUrl from '../../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import dateFormat from 'dateformat'
 import NewsVideoComp from "./NewsVideoComp"
@@ -10,12 +10,12 @@ const NewsVideo = () => {
     const GetPostData = async (l) => {
         if(l!=null)
         {
-            const res = await axios.get(`https://dn.wcprojects.in/api/${l}/videos`)
+            const res = await BaseUrl.get(`${l}/videos`)
             console.log(res.data.posts);
             setVideolist(res.data.posts)
         }
         else{
-            const res = await axios.get('https://dn.wcprojects.in/api/1/videos')
+            const res = await BaseUrl.get('1/videos')
             console.log(res.data.posts);
             setVideolist(res.data.posts)
         }

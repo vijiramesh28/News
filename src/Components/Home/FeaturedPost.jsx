@@ -1,4 +1,4 @@
-import axios from 'axios'
+import BaseUrl from '../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
@@ -10,19 +10,18 @@ const FeaturedPost = () => {
     const [loading, setLoading] = useState(false)
     
    
-
     const GetPostData = async (l) => {
         if(l!=null)
         {
-            const re = await axios.get(`https://dn.wcprojects.in/api/${l}/editorpick`)
-            const res = await axios.get(`https://dn.wcprojects.in/api/${l}/slider`)
+            const re = await BaseUrl.get(`${l}/editorpick`)
+            const res = await BaseUrl.get(`${l}/slider`)
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)
         }
         else{
-            const re = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
-            const res = await axios.get('https://dn.wcprojects.in/api/1/slider')
+            const re = await BaseUrl.get('1/editorpick')
+            const res = await BaseUrl.get('1/slider')
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)

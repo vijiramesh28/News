@@ -1,4 +1,4 @@
-import axios from 'axios'
+import BaseUrl from '../../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import dateFormat from 'dateformat'
 import OwlCarousel from 'react-owl-carousel'
@@ -11,13 +11,13 @@ const LatNewsSlider = () => {
 
     const GetPostData = async (l) => {
         if (l != null) {
-            const res = await axios.get(`https://dn.wcprojects.in/api/${l}/editorpick`)
+            const res = await BaseUrl.get(`${l}/editorpick`)
             console.log(res.data.posts);
             setLatestNews(res.data.posts)
             setLoading(true)
         }
         else {
-            const res = await axios.get('https://dn.wcprojects.in/api/1/editorpick')
+            const res = await BaseUrl.get('1/editorpick')
             console.log(res.data.posts);
             setLatestNews(res.data.posts)
             setLoading(true)

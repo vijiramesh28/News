@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import BaseUrl from '../../../Api/RestApi'
 import ENtertainmentSlider from './ENtertainmentSlider'
 import HealthNewsMain from './HealthNewsMain'
 // import Tabs from './TabLists'
@@ -17,9 +17,9 @@ const NewsTabs = () => {
     const getPostData = async (l) => {
         if(l!=null)
         {
-        // const res = await axios.get(`https://dn.wcprojects.in/api/${l}/crime/crime`)
-        // const imp = await axios.get(`https://dn.wcprojects.in/api/${l}/imp/important-news`)
-        const health = await axios.get(`https://dn.wcprojects.in/api/${l}/health/health`)
+        // const res = await BaseUrl.get(`${l}/crime/crime`)
+        // const imp = await BaseUrl.get(`${l}/imp/important-news`)
+        const health = await BaseUrl.get(`${l}/health/health`)
         
        
         // console.log(res.data.allposts);
@@ -30,9 +30,9 @@ const NewsTabs = () => {
         setLoading(true)
         }
         else{
-            // const res = await axios.get(`https://dn.wcprojects.in/api/1/crime/crime`)
-            const imp = await axios.get(`https://dn.wcprojects.in/api/1/imp/important-news`)
-            const health = await axios.get(`https://dn.wcprojects.in/api/1/health/health`)
+            // const res = await BaseUrl.get(`1/crime/crime`)
+            const imp = await BaseUrl.get(`1/imp/important-news`)
+            const health = await BaseUrl.get(`1/health/health`)
         
         // console.log(res.data.language.allposts);
         // setCrimeNews(res.data.allposts)

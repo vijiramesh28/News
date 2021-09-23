@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import BaseUrl from '../../../Api/RestApi'
 import OwlCarousel from 'react-owl-carousel'
 import SingleSlider from "./SingleSlider"
 import dateFormat from 'dateformat'
@@ -11,13 +11,13 @@ const ENtertainmentSlider = () => {
 
     const getPostData = async (l) => {
         if (l != null) {
-            const entert = await axios.get(`https://dn.wcprojects.in/api/${l}/entertainment/entertainment`)
+            const entert = await BaseUrl.get(`${l}/entertainment/entertainment`)
             setEntertNews(entert.data.posts)
             setEnterNewsCat(entert.data.category)
             setLoading(true)
         }
         else {
-            const entert = await axios.get('https://dn.wcprojects.in/api/1/entertainment/entertainment')
+            const entert = await BaseUrl.get('1/entertainment/entertainment')
             setEntertNews(entert.data.posts)
             setEnterNewsCat(entert.data.category)
             setLoading(true)
