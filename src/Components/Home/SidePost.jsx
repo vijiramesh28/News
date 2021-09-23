@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import instance from '../../Api/RestApi'
 import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
+import { Col, Row } from 'react-bootstrap'
 
 const SidePost = () => {
     const [sidepost, setSidepost] = useState([])
@@ -26,8 +27,8 @@ const SidePost = () => {
     }, [])
 
     return (
-        <div className="col-lg-4 col-md-12 pad-l">
-            <div className="row">
+        <Col lg={4} md={12} className="pad-l">
+            <Row>
             
                 {loading?(
                     sidepost.map((curElem, ind) => {
@@ -36,7 +37,7 @@ const SidePost = () => {
                         const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
 
                         return (
-                            <div className="col-md-12">
+                            <Col md={12}>
                                 <div className="utf_post_overaly_style text-center first clearfix">
                                     <div className="utf_post_thumb">
                                         <Link to={`/post/${curElem.id}`}><img className="img-fluid" src={`https://dn.wcprojects.in/${curElem.img_1}`} alt="" /></Link>
@@ -49,7 +50,7 @@ const SidePost = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </Col>
                         )
 
                     })
@@ -60,8 +61,8 @@ const SidePost = () => {
                 </svg></div>)
                 }
 
-            </div>
-        </div>
+            </Row>
+        </Col>
     )
 }
 
