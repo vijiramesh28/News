@@ -1,4 +1,4 @@
-import BaseUrl from '../../Api/RestApi'
+import instance from '../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
@@ -13,15 +13,15 @@ const FeaturedPost = () => {
     const GetPostData = async (l) => {
         if(l!=null)
         {
-            const re = await BaseUrl.get(`${l}/editorpick`)
-            const res = await BaseUrl.get(`${l}/slider`)
+            const re = await instance.get(`${l}/editorpick`)
+            const res = await instance.get(`${l}/slider`)
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)
         }
         else{
-            const re = await BaseUrl.get('1/editorpick')
-            const res = await BaseUrl.get('1/slider')
+            const re = await instance.get('1/editorpick')
+            const res = await instance.get('1/slider')
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)

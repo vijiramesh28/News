@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import BaseUrl from '../../Api/RestApi'
+import instance from '../../Api/RestApi'
 import dateFormat from 'dateformat'
 import { Link } from 'react-router-dom'
 
@@ -9,12 +9,12 @@ const SidePost = () => {
 
     const GetPostData = async (l) => {
         if (l != null) {
-            const re = await BaseUrl.get(`${l}/slider`)
+            const re = await instance.get(`${l}/slider`)
             setSidepost(re.data.twoPosts)
             setLoading(true)
         }
         else {
-            const re = await BaseUrl.get('1/slider')
+            const re = await instance.get('1/slider')
             setSidepost(re.data.twoPosts)
             setLoading(true)
         }
