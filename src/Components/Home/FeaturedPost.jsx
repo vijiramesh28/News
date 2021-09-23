@@ -1,9 +1,10 @@
 import instance from '../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
+import OwlCarousel from 'react-owl-carousel'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
-import OwlCarousel from 'react-owl-carousel'
 import SidePost from './SidePost'
+import { Container, Row, Col } from 'react-bootstrap'
 
 const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
@@ -37,9 +38,9 @@ const FeaturedPost = () => {
         <>
 
             <section className="utf_featured_post_area pt-4">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-8 col-md-12 pad-r">
+                <Container>
+                    <Row>
+                        <Col lg={8} md={12} className="pad-r">
                             {loading ? (
 
                                 LatestNews.length && (
@@ -79,11 +80,11 @@ const FeaturedPost = () => {
 
                             )}
 
-                        </div>
+                        </Col>
 
                                 <SidePost />
-                    </div>
-                </div>
+                    </Row>
+                </Container>
             </section>
 
 
