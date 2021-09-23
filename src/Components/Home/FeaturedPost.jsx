@@ -44,7 +44,7 @@ const FeaturedPost = () => {
                             {loading ? (
 
                                 LatestNews.length && (
-                                    <Carousel indicators={false} interval={2000} className="header-carousel" >
+                                    <Carousel indicators={false} interval={2000} className="header-carousel"  >
 
                                         {
                                             LatestNews.map((currElem, ind) => {
@@ -57,7 +57,7 @@ const FeaturedPost = () => {
                                                             className="d-block w-100 opacity-50"
                                                             src={`https://dn.wcprojects.in/${currElem.img_1}`}
                                                             alt="Latest News Slider"
-                                                            style={{"borderRadius":"5px", "height":"64vh"}}
+                                                            style={{"borderRadius":"5px"}}
                                                         />
 
                                                         <Carousel.Caption>
