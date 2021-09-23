@@ -61,7 +61,7 @@ const OtherNews = () => {
                                 {loading?(
                                     OtherNews.length && (
                                         <OwlCarousel className="owl-carousel owl-theme utf_more_news_slide" items={1}  responsiveRefreshRate={200} lazyLoad dots={true}  id="utf_more_news_slide">
-
+                                             
                                             {
                                                 OtherNews.map((post, ind) => {
                                                     const postdate = post.updated_at;
@@ -74,7 +74,7 @@ const OtherNews = () => {
                                                 })
                                             }
 
-
+                                         
 
                                         </OwlCarousel>
                                     )

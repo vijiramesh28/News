@@ -3,11 +3,12 @@ import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
 import OwlCarousel from 'react-owl-carousel'
+import SidePost from './SidePost'
 
 const FeaturedPost = () => {
     const [LatestNews, setLatestNews] = useState([])
     const [loading, setLoading] = useState(false)
-    const [sidepost, setSidepost] = useState([])
+    
    
 
     const GetPostData = async (l) => {
@@ -17,7 +18,6 @@ const FeaturedPost = () => {
             const res = await axios.get(`https://dn.wcprojects.in/api/${l}/slider`)
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
-            setSidepost(re.data.posts)
             setLoading(true)
         }
         else{
@@ -25,7 +25,6 @@ const FeaturedPost = () => {
             const res = await axios.get('https://dn.wcprojects.in/api/1/slider')
             console.log(res.data.slider)
             setLatestNews(res.data.slider)
-            setSidepost(re.data.posts)
             setLoading(true)
         }
        
@@ -83,37 +82,7 @@ const FeaturedPost = () => {
 
                         </div>
 
-                        <div className="col-lg-4 col-md-12 pad-l">
-                            <div className="row">
-
-                                {
-                                    sidepost.slice(0, 2).map((curElem, ind) => {
-
-                                        const postdate = curElem.updated_at
-                                        const postmoddate = dateFormat(postdate, "dd mmmm , yyyy")
-
-                                        return (
-                                            <div className="col-md-12">
-                                                <div className="utf_post_overaly_style text-center first clearfix">
-                                                    <div className="utf_post_thumb">
-                                                        <Link to={`/post/${curElem.id}`}><img className="img-fluid" src={`https://dn.wcprojects.in/${curElem.img_4}`} alt="" /></Link>
-                                                    </div>
-                                                    <div className="utf_post_content">
-                                                        <Link to={`/post/${curElem.id}`} className="utf_post_cat" >{curElem.category.name}</Link>
-                                                        <h2 className="utf_post_title clamped title-medium"><a href="post.html">{curElem.title}</a></h2>
-                                                        <div className="utf_post_meta">
-                                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i>{postmoddate}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-
-                                    })
-                                }
-
-                            </div>
-                        </div>
+                                <SidePost />
                     </div>
                 </div>
             </section>

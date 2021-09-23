@@ -17,8 +17,7 @@ const Home = () => {
                 <title>Daily News</title>
                 <meta name="description" content="Latest News in English, Hindi and Marathi of India" />
             </Helmet>
-            {/* Featured Post */}
-            
+           
             <FeaturedPost />
             <CategoryList />
             <AdContentArea />

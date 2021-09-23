@@ -11,14 +11,14 @@ const Footer = () => {
     const GetMenusApi = async (t) => {
       if(t!=null)
       {
-        const res = await axios.get(`https://wcprojects.in/api/${t}/categories`)
-        console.log(res.data.language.categories);
-        setCategories(res.data.language.categories)
+        const res = await axios.get(`https://dn.wcprojects.in/api/${t}/categories`)
+        console.log(res.data.categories);
+        setCategories(res.data.categories)
       }
       else{
-        const res = await axios.get(`https://wcprojects.in/api/eng/categories`)
-        console.log(res.data.language.categories);
-        setCategories(res.data.language.categories)
+        const res = await axios.get(`https://dn.wcprojects.in/api/english/categories`)
+        console.log(res.data.categories);
+        setCategories(res.data.categories)
       }
         
         
@@ -75,7 +75,7 @@ const Footer = () => {
                                             return (
                                                 <li key={curElem.id}>
                                                     <i className="fa fa-angle-double-right"></i><Link strict to={`/category/${curElem.id}`}><span className="catTitle">{curElem.name}</span>
-                                                    <span className="catCounter"> xx</span></Link>
+                                                    <span className="catCounter"> ({curElem.subcategories.length})</span></Link>
                                                 </li>
                                             )
                                         })

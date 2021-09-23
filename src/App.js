@@ -12,25 +12,11 @@ const PageNotFound = lazy(()=>import('./Pages/PageNotFound'));
 const Post = lazy(()=>import('./Pages/Post'));
 const Home = lazy(()=>import('./Pages/Home'));
 
-// import Footer from './Components/Footer';
-// import Header from './Components/Header'
-// import Category from './Pages/Category';
-// import Home from './Pages/Home' 
-// // import Login from './Pages/Login';
-// import PageNotFound from './Pages/PageNotFound';
-// import Post from './Pages/Post';
-
-
-
-
 function App() {
-//   const { t } = useTranslation()
-//  const data =  t('language.name',{returnObjects: true})
-//   console.log(data)
+
   return (
     <>
     
-{/* //     <h2>{data}</h2>  */}
   <BrowserRouter>
 <div className="body-inner">
   
