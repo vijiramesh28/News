@@ -1,5 +1,4 @@
-
-import axios from 'axios';
+import instance from '../../Api/RestApi'
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom"
 const MainNav = () => {
@@ -10,12 +9,12 @@ const MainNav = () => {
     const GetMenusApi = async (t) => {
         if(t!=null)
         {
-        const res = await axios.get(`https://dn.wcprojects.in/api/${t}/categories`)
+        const res = await instance.get(`${t}/categories`)
         console.log(res.data.categories);
         setMenus(res.data.categories)
         }
         else{
-        const res = await axios.get(`https://dn.wcprojects.in/api/english/categories`)
+        const res = await instance.get(`english/categories`)
         console.log(res.data.categories);
         setMenus(res.data.categories)
         }
