@@ -1,8 +1,8 @@
-import BaseUrl from '../../../Api/RestApi'
+import instance from '../../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import dateFormat from 'dateformat'
 import NewsVideoComp from "./NewsVideoComp"
-import {Container, Row } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 
 
 const NewsVideo = () => {
@@ -11,12 +11,12 @@ const NewsVideo = () => {
     const GetPostData = async (l) => {
         if(l!=null)
         {
-            const res = await BaseUrl.get(`${l}/videos`)
+            const res = await instance.get(`${l}/videos`)
             console.log(res.data.posts);
             setVideolist(res.data.posts)
         }
         else{
-            const res = await BaseUrl.get('1/videos')
+            const res = await instance.get('1/videos')
             console.log(res.data.posts);
             setVideolist(res.data.posts)
         }
@@ -40,7 +40,7 @@ const NewsVideo = () => {
                                 const videoDate = videodata.updated_at
                                 const videomoddate = dateFormat(videoDate, "dd mmmm , yyyy")
                                 const VideoPlay = videodata.video.replace('https://www.youtube.com/watch?v=','');
-                                return <NewsVideoComp  key={ind} videoThumbnail={`https://dn.wcprojects.in/${videodata.img_4}`} alt={videodata.alt} videoplay={VideoPlay} VideoTitle={videodata.title} VideoReleaseDate={videomoddate} />
+                                return <NewsVideoComp  key={ind} videoThumbnail={`https://dn.wcprojects.in/${videodata.img_3}`} alt={videodata.alt} videoplay={VideoPlay} VideoTitle={videodata.title} VideoReleaseDate={videomoddate} />
 
                             })
                         }
