@@ -57,7 +57,7 @@ const FeaturedPost = () => {
                                                             className="d-block w-100 opacity-50"
                                                             src={`https://dn.wcprojects.in/${currElem.img_1}`}
                                                             alt="Latest News Slider"
-                                                            style={{"borderRadius":"5px"}}
+                                                            style={{"borderRadius":"5px", "height":"65vh"}}
                                                         />
 
                                                         <Carousel.Caption>

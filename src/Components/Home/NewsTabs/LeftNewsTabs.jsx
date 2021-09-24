@@ -1,48 +1,66 @@
-import React from 'react'
+import BaseUrl from '../../../Api/RestApi'
+import React,{ useState, useEffect } from 'react'
+import LeftNewsTabComp from './LeftNewsTabComp'
 
 const LeftNewsTabs = () => {
+    const [CrimeNews, setCrimeNews] = useState([])
+    const [CrimeNewsCat, setCrimeNewsCat] = useState([])
+    const [CrimeSubCat, setCrimeSubCat] = useState([])
+    const [ImportantNews, setImportantNews] = useState([])
+    const [ImportantNewsCat, setImportantNewsCat] = useState([])
+    const [ImportantSubCat, setImportantSubCat] = useState([])
+    const [loading, setLoading] = useState(false)
+
+
+    const getPostData = async (l) => {
+        if (l != null) {
+            const res = await BaseUrl.get(`${l}/crime/crime`)
+            const imp = await BaseUrl.get(`${l}/imp/important-news`)
+
+            console.log(res.data.allposts);
+            setCrimeNews(res.data.allposts)
+            setCrimeNewsCat(res.data.category)
+            setCrimeSubCat(res.data.categories)
+            setImportantNews(imp.data.allposts)
+            setImportantNewsCat(imp.data.category)
+            setImportantSubCat(imp.data.categories)
+            setLoading(true)
+        }
+        else {
+            const res = await BaseUrl.get(`1/crime/crime`)
+            const imp = await BaseUrl.get(`1/imp/important-news`)
+
+
+            console.log(res.data.language.allposts);
+            setCrimeNews(res.data.allposts)
+            setCrimeNewsCat(res.data.category)   
+            setCrimeSubCat(res.data.categories)
+            setImportantNews(imp.data.allposts)
+            setImportantNewsCat(imp.data.category)
+            setImportantSubCat(imp.data.categories)
+            setLoading(true)
+        }
+
+    }
+
+    useEffect(() => {
+        const langData = localStorage.getItem("lang")
+        getPostData(langData)
+    }, [])
+
     return (
         <div>
-             {/* {
-                                loading ? (
-
-                                    CrimeNews.map((curElem, ind) => {
-                                        return (
-                                            <div className="utf_featured_tab color-default">
-
-                                                <h3 className="utf_block_title"><span>{curElem.name}</span></h3>
-
-                                                <ul className="nav nav-tabs">
-                                                    <Tabs submenuList={CrimeNews} />
-
-                                                </ul>
-                                                <div className="tab-content">
-                                                    <div className="tab-pane active animated fadeInRight" id="tab_a">
-                                                        <div className="row">
-                                                            <div className="col-lg-6 col-md-6">
-                                                                <TabMainNews postData={CrimeNews} />
-                                                            </div>
-
-                                                            <div className="col-lg-6 col-md-6">
-                                                                <div className="utf_list_post_block">
-                                                                    <ul className="utf_list_post">
-                                                                        <TabLists postData={CrimeNews} />
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        )
-                                    })
-                                ) : (<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-                                    <rect width="400" height="300" fill="#fcfcfc"></rect>
-                                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
-                                </svg></div>)
-                            } */}
+            {
+                loading ? (
+                    <>
+                    <LeftNewsTabComp CrimeNews={CrimeNews} CrimeNewsCat={CrimeNewsCat} CrimeSubCat={CrimeSubCat} />
+                    <LeftNewsTabComp CrimeNews={ImportantNews} CrimeNewsCat={ImportantNewsCat} CrimeSubCat={ImportantSubCat} />
+                    </>
+                ) : (<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                    <rect width="400" height="300" fill="#fcfcfc"></rect>
+                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
+                </svg></div>)
+            }
         </div>
     )
 }

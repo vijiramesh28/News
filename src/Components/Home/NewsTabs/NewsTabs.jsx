@@ -4,46 +4,27 @@ import ENtertainmentSlider from './ENtertainmentSlider'
 import HealthNewsMain from './HealthNewsMain'
 import { Container, Col, Row } from 'react-bootstrap'
 import LeftNewsTabs from './LeftNewsTabs'
-// import Tabs from './TabLists'
-// import TabLists from './TabLists'
-// import TabMainNews from './TabMainNews'
+
 
 const NewsTabs = () => {
-    // const [CrimeNews, setCrimeNews] = useState([])
-    // const [ImportantNews, setImportantNews] = useState([])
     const [HealthNews, setHealthNews] = useState([])
     const [HealthNewsCat, setHealthNewsCat] = useState([])
-    const [loading, setLoading] = useState(false)
 
 
     const getPostData = async (l) => {
-        if(l!=null)
-        {
-        // const res = await BaseUrl.get(`${l}/crime/crime`)
-        // const imp = await BaseUrl.get(`${l}/imp/important-news`)
-        const health = await BaseUrl.get(`${l}/health/health`)
-        
-       
-        // console.log(res.data.allposts);
-        // setCrimeNews(res.data.allposts)
-        // setImportantNews(res.data.allposts)
-        setHealthNews(health.data.posts)
-        setHealthNewsCat(health.data.category)
-        setLoading(true)
+        if (l != null) {
+            const health = await BaseUrl.get(`${l}/health/health`)
+            setHealthNews(health.data.posts)
+            setHealthNewsCat(health.data.category)
+          
         }
-        else{
-            // const res = await BaseUrl.get(`1/crime/crime`)
-            const imp = await BaseUrl.get(`1/imp/important-news`)
+        else {
             const health = await BaseUrl.get(`1/health/health`)
-        
-        // console.log(res.data.language.allposts);
-        // setCrimeNews(res.data.allposts)
-        // setImportantNews(res.data.allposts)
-        setHealthNews(health.data.posts)
-        setHealthNewsCat(health.data.category)
-        setLoading(true)
+            setHealthNews(health.data.posts)
+            setHealthNewsCat(health.data.category)
+            
         }
-        
+
     }
     useEffect(() => {
         const langData = localStorage.getItem("lang")
@@ -68,7 +49,7 @@ const NewsTabs = () => {
 
                         <Col lg={4} md={12} >
                             <div className="sidebar utf_sidebar_right">
-                               <ENtertainmentSlider />
+                                <ENtertainmentSlider />
 
                                 <HealthNewsMain healthNews={HealthNews} HealthNewsCat={HealthNewsCat} />
                             </div>

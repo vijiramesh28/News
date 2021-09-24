@@ -1,4 +1,4 @@
-import axios from 'axios'
+import instance from '../../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
 import OwlCarousel from 'react-owl-carousel'
 import dateFormat from 'dateformat'
@@ -16,8 +16,8 @@ const OtherNews = () => {
     const GetPostData = async (l,t) => {
         if(l!=null && t!=null)
         {
-            const res = await axios.get(`https://dn.wcprojects.in/api/${t}/category/latest-news`)
-            const re = await axios.get(`https://dn.wcprojects.in/api/${l}/job/jobs`)
+            const res = await instance.get(`${t}/category/latest-news`)
+            const re = await instance.get(`${l}/job/jobs`)
             console.log(re)
             setOtherNews(res.data.posts.data)
             setOtherNewsCat(res.data.category)
@@ -26,8 +26,8 @@ const OtherNews = () => {
             setLoading(true)
         }
         else{
-            const res = await axios.get('https://dn.wcprojects.in/api/english/category/latest-news')
-            const re = await axios.get('https://dn.wcprojects.in/api/1/job/jobs')
+            const res = await instance.get('english/category/latest-news')
+            const re = await instance.get('1/job/jobs')
             console.log(re)
             setOtherNews(res.data.posts.data)
             setOtherNewsCat(res.data.category)
