@@ -1,4 +1,4 @@
-import BaseUrl from '../../../Api/RestApi'
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import OwlCarousel from 'react-owl-carousel'
 import dateFormat from 'dateformat'
@@ -16,8 +16,8 @@ const OtherNews = () => {
     const GetPostData = async (l,t) => {
         if(l!=null && t!=null)
         {
-            const res = await BaseUrl.get(`${t}/category/1`)
-            const re = await BaseUrl.get(`${l}/job/jobs`)
+            const res = await axios.get(`https://dn.wcprojects.in/api/${t}/category/latest-news`)
+            const re = await axios.get(`https://dn.wcprojects.in/api/${l}/job/jobs`)
             console.log(re)
             setOtherNews(res.data.posts.data)
             setOtherNewsCat(res.data.category)
@@ -26,8 +26,8 @@ const OtherNews = () => {
             setLoading(true)
         }
         else{
-            const res = await BaseUrl.get('english/category/1')
-            const re = await BaseUrl.get('1/job/jobs')
+            const res = await axios.get('https://dn.wcprojects.in/api/english/category/latest-news')
+            const re = await axios.get('https://dn.wcprojects.in/api/1/job/jobs')
             console.log(re)
             setOtherNews(res.data.posts.data)
             setOtherNewsCat(res.data.category)
@@ -49,9 +49,9 @@ const OtherNews = () => {
         <>
             {/* <!-- 3rd Block Wrapper Start --> */}
             <section className="utf_block_wrapper p-bottom-0">
-                <Container>
+            <Container>
                     <Row>
-                        <Col lg={8} md={12} >
+                        <Col lg={8} md={12}>
                             <div className="utf_more_news block color-default">
                                 {
                                     
@@ -88,7 +88,7 @@ const OtherNews = () => {
                             </div>
                         </Col>
 
-                        <Col lg={4} sm={12} >
+                        <Col lg={4} sm={12} class="col-lg-4 col-sm-12">
                             <div className="sidebar utf_sidebar_right">
                                 <div className="widget color-default">
                                     {
