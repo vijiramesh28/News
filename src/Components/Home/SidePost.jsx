@@ -6,18 +6,18 @@ import { Col, Row } from 'react-bootstrap'
 
 const SidePost = () => {
     const [sidepost, setSidepost] = useState([])
-    const [loading, setLoading] = useState(false)
+
 
     const GetPostData = async (l) => {
         if (l != null) {
             const re = await instance.get(`${l}/slider`)
             setSidepost(re.data.twoPosts)
-            setLoading(true)
+
         }
         else {
             const re = await instance.get('1/slider')
             setSidepost(re.data.twoPosts)
-            setLoading(true)
+
         }
     }
 
@@ -29,8 +29,8 @@ const SidePost = () => {
     return (
         <Col lg={4} md={12} className="pad-l">
             <Row>
-            
-                {loading?(
+
+                {
                     sidepost.map((curElem, ind) => {
 
                         const postdate = curElem.updated_at
@@ -55,10 +55,7 @@ const SidePost = () => {
 
                     })
 
-                    ):(<div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
-                    <rect width="400" height="300" fill="#fcfcfc"></rect>
-                    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
-                </svg></div>)
+
                 }
 
             </Row>

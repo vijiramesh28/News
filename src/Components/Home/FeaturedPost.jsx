@@ -1,6 +1,5 @@
 import instance from '../../Api/RestApi'
 import React, { useState, useEffect } from 'react'
-import OwlCarousel from 'react-owl-carousel'
 import '../../Assets/slider.css'
 import { Link } from 'react-router-dom'
 import dateFormat from 'dateformat'
@@ -14,16 +13,12 @@ const FeaturedPost = () => {
 
     const GetPostData = async (l) => {
         if (l != null) {
-            const re = await instance.get(`${l}/editorpick`)
             const res = await instance.get(`${l}/slider`)
-            console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)
         }
         else {
-            const re = await instance.get('1/editorpick')
             const res = await instance.get('1/slider')
-            console.log(res.data.slider)
             setLatestNews(res.data.slider)
             setLoading(true)
         }
@@ -57,14 +52,14 @@ const FeaturedPost = () => {
                                                             className="d-block w-100 opacity-50"
                                                             src={`https://dn.wcprojects.in/${currElem.img_1}`}
                                                             alt="Latest News Slider"
-                                                            style={{"borderRadius":"5px", "height":"65vh"}}
+                                                            style={{ "borderRadius": "5px", "height": "65vh" }}
                                                         />
 
                                                         <Carousel.Caption>
-                                                                <p><Link to={`/post/${currElem.id}`} className="post_cat" >{currElem.category.name}</Link></p>
-                                                                <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${currElem.id}`} className="text-white">{currElem.title}</Link></h2>
-                                                                <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
-                                                            
+                                                            <p><Link to={`/post/${currElem.id}`} className="post_cat" >{currElem.category.name}</Link></p>
+                                                            <h2 className="utf_post_title clamped title-extra-large"><Link to={`/post/${currElem.id}`} className="text-white">{currElem.title}</Link></h2>
+                                                            <span className="utf_post_date"><i className="fa fa-clock-o"></i> {postmoddate}</span>
+
                                                         </Carousel.Caption>
                                                     </Carousel.Item>
                                                 )
@@ -88,7 +83,16 @@ const FeaturedPost = () => {
 
                         </Col>
 
-                        <SidePost />
+                        {loading ? (
+                            <SidePost />
+                        ) : (
+                            <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300">
+                                <rect width="400" height="300" fill="#fcfcfc"></rect>
+                                <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="monospace" font-size="26px" fill="#cccccc">Loading</text>
+                            </svg></div>
+
+                        )}
+
                     </Row>
                 </Container>
             </section>
